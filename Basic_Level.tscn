@@ -1,0 +1,480 @@
+[gd_scene load_steps=27 format=3 uid="uid://cgqiegoofee3"]
+
+[ext_resource type="Script" path="res://Match3Grid.gd" id="1_3ysyt"]
+[ext_resource type="Script" path="res://level.gd" id="1_gwyb8"]
+[ext_resource type="PackedScene" uid="uid://cy4di06y1m8gn" path="res://OfficeIcons/office_grid_piece.tscn" id="2_0r1ik"]
+[ext_resource type="Script" path="res://Router.gd" id="2_eiqs1"]
+[ext_resource type="Script" path="res://LevelController.gd" id="3_gnyf6"]
+[ext_resource type="Script" path="res://MovesLeft.gd" id="3_iok0f"]
+[ext_resource type="Script" path="res://Internet.gd" id="4_4vqxg"]
+[ext_resource type="Script" path="res://FlowLeft.gd" id="4_w0p1e"]
+[ext_resource type="Texture2D" uid="uid://djrk2t3hguta6" path="res://OfficeIcons/MovesBackground.png" id="5_7s16g"]
+[ext_resource type="Texture2D" uid="uid://ba07sr0f7di0f" path="res://OfficeIcons/TaskBar.png" id="5_clg8l"]
+[ext_resource type="Texture2D" uid="uid://cigh80dpddqby" path="res://OfficeIcons/TaskBar-process.png" id="6_14dnm"]
+[ext_resource type="Texture2D" uid="uid://dbf50acepgmkn" path="res://OfficeIcons/TaskBar-selectedprocess.png" id="7_4vh52"]
+[ext_resource type="Script" path="res://Completion.gd" id="10_likmf"]
+[ext_resource type="Texture2D" uid="uid://bg8xm1bfr2d5j" path="res://OfficeIcons/ProgressBar.png" id="10_ria44"]
+[ext_resource type="Texture2D" uid="uid://ckdfwv748or7j" path="res://OfficeIcons/ProgressBarFull.png" id="11_fswxq"]
+[ext_resource type="Texture2D" uid="uid://c4v6ldmk7o46t" path="res://Stars.png" id="13_20ape"]
+[ext_resource type="Texture2D" uid="uid://bu0t2ewgr2qe3" path="res://Stars-full.png" id="14_khye8"]
+[ext_resource type="Script" path="res://FlowSlowdown.gd" id="16_x81m8"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aqrsy"]
+texture = ExtResource("5_7s16g")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3l7ne"]
+texture = ExtResource("6_14dnm")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vpan7"]
+texture = ExtResource("7_4vh52")
+
+[sub_resource type="Theme" id="Theme_vhxvb"]
+Button/styles/normal = SubResource("StyleBoxTexture_3l7ne")
+Button/styles/pressed = SubResource("StyleBoxTexture_vpan7")
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_lymbo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sutfy"]
+
+[sub_resource type="GDScript" id="GDScript_i4ef8"]
+script/source = "extends Button
+
+func _on_pressed():
+	get_tree().change_scene_to_file(\"res://LevelSelect/level_select.tscn\")
+"
+
+[sub_resource type="GDScript" id="GDScript_skkop"]
+script/source = "extends Button
+
+
+func _on_pressed():
+	get_tree().reload_current_scene()
+"
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_gwyb8")
+piece_types = Array[int]([8, 11, 10, 13, 14, 15, 16])
+goals = Array[int]([14])
+obstacles = Array[int]([12])
+poppables = Array[int]([8, 11, 10])
+moves = 8
+failures_to_lose = 10
+goals_to_win = 50
+matches_to_pop = 10
+
+[node name="FlowLeft" type="HBoxContainer" parent="."]
+offset_left = 1152.0
+offset_top = 582.0
+offset_right = 1272.0
+offset_bottom = 625.0
+theme_override_constants/separation = 8
+script = ExtResource("4_w0p1e")
+
+[node name="Label2" type="Label" parent="FlowLeft"]
+layout_mode = 2
+text = " "
+
+[node name="FlowLeft" type="Button" parent="FlowLeft"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxTexture_aqrsy")
+text = "0"
+
+[node name="Label" type="Label" parent="FlowLeft"]
+layout_mode = 2
+text = "Flow"
+
+[node name="Wall" type="ColorRect" parent="."]
+z_index = -2
+offset_left = -38.0
+offset_top = -20.0
+offset_right = 1312.0
+offset_bottom = 732.0
+color = Color(0.52, 0.52, 0.3952, 1)
+
+[node name="Desk" type="ColorRect" parent="."]
+z_index = -2
+offset_left = -66.0
+offset_top = 495.0
+offset_right = 1360.0
+offset_bottom = 895.0
+color = Color(0.333333, 0.333333, 0.333333, 1)
+
+[node name="Router" type="ColorRect" parent="."]
+z_index = -1
+offset_left = 78.0
+offset_top = 569.0
+offset_right = 456.0
+offset_bottom = 639.0
+color = Color(0.67451, 0.67451, 0.67451, 1)
+script = ExtResource("2_eiqs1")
+internet = NodePath("../Internet")
+
+[node name="Slt2" type="ColorRect" parent="Router"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 23.0
+offset_right = 61.0
+offset_bottom = 53.0
+color = Color(0, 0, 0, 1)
+
+[node name="Slt3" type="ColorRect" parent="Router"]
+layout_mode = 0
+offset_left = 97.0
+offset_top = 23.0
+offset_right = 125.0
+offset_bottom = 53.0
+color = Color(0, 0, 0, 1)
+
+[node name="Slt4" type="ColorRect" parent="Router"]
+layout_mode = 0
+offset_left = 161.0
+offset_top = 23.0
+offset_right = 189.0
+offset_bottom = 53.0
+color = Color(0, 0, 0, 1)
+
+[node name="Button" type="Button" parent="Router"]
+z_index = 1
+layout_mode = 0
+offset_left = 281.0
+offset_top = 9.0
+offset_right = 357.0
+offset_bottom = 61.0
+focus_mode = 0
+disabled = true
+text = "REFRESH"
+
+[node name="Refreshes" type="ColorRect" parent="Router/Button"]
+z_index = 2
+layout_mode = 0
+offset_left = -50.0
+offset_top = 5.0
+offset_right = -10.0
+offset_bottom = 46.0
+color = Color(0.329412, 0.329412, 0.329412, 1)
+
+[node name="Label" type="Label" parent="Router/Button/Refreshes"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 41.0
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Wire1" type="ColorRect" parent="Router"]
+offset_left = 91.0
+offset_top = 23.0
+offset_right = 131.0
+offset_bottom = 63.0
+mouse_filter = 1
+color = Color(0, 0.12549, 1, 1)
+
+[node name="Wire2" type="ColorRect" parent="Router/Wire1"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 19.0
+offset_right = 36.0
+offset_bottom = 227.0
+mouse_filter = 1
+color = Color(0, 0.12549, 1, 1)
+
+[node name="Computer back4" type="ColorRect" parent="."]
+offset_left = 501.0
+offset_top = -3.0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
+
+[node name="Computer back3" type="ColorRect" parent="Computer back4"]
+layout_mode = 0
+offset_left = 87.0
+offset_top = 613.0
+offset_right = 555.0
+offset_bottom = 664.0
+color = Color(0, 0, 0, 1)
+
+[node name="Computer back" type="ColorRect" parent="Computer back4"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 17.0
+offset_right = 634.0
+offset_bottom = 634.0
+color = Color(0.631373, 0.709804, 0.709804, 1)
+
+[node name="Computer back2" type="ColorRect" parent="Computer back4"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 655.0
+offset_right = 595.0
+offset_bottom = 706.0
+color = Color(0, 0, 0, 1)
+
+[node name="Computer back4" type="NinePatchRect" parent="Computer back4"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 579.0
+offset_right = 634.0
+offset_bottom = 634.0
+texture = ExtResource("5_clg8l")
+region_rect = Rect2(-0.412048, 0, 1600.51, 34)
+patch_margin_left = 203
+patch_margin_top = 11
+patch_margin_right = 95
+patch_margin_bottom = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Computer back4"]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 587.0
+offset_right = 539.0
+offset_bottom = 633.0
+theme = SubResource("Theme_vhxvb")
+
+[node name="Button" type="Button" parent="Computer back4/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_lymbo")
+text = "Computer"
+
+[node name="Button2" type="Button" parent="Computer back4/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_lymbo")
+text = "Internet"
+
+[node name="MovesLeft" type="Label" parent="Computer back4"]
+layout_mode = 2
+offset_left = 545.0
+offset_top = 587.0
+offset_right = 633.0
+offset_bottom = 632.0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sutfy")
+text = "25 Moves"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_iok0f")
+
+[node name="Office" type="Node2D" parent="."]
+position = Vector2(544, 576)
+script = ExtResource("1_3ysyt")
+grid_piece = ExtResource("2_0r1ik")
+
+[node name="Internet" type="Node2D" parent="."]
+visible = false
+position = Vector2(544, 576)
+script = ExtResource("4_4vqxg")
+piece_types = Array[int]([8, 9, 10, 11, 12, 14, 13, 15, 16])
+grid_piece = ExtResource("2_0r1ik")
+board_size = Vector2i(8, 8)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 112.0
+offset_top = 64.0
+offset_right = 389.0
+offset_bottom = 400.0
+script = ExtResource("3_gnyf6")
+
+[node name="Quotas" type="ColorRect" parent="Control"]
+z_index = -2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.741176, 0.741176, 0.741176, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Progress" type="VBoxContainer" parent="Control/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/Progress"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Quotas"
+
+[node name="HFlowContainer" type="HFlowContainer" parent="Control/VBoxContainer/Progress"]
+layout_mode = 2
+
+[node name="Mistakes" type="VBoxContainer" parent="Control/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/Mistakes"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Mistakes"
+
+[node name="HFlowContainer" type="HFlowContainer" parent="Control/VBoxContainer/Mistakes"]
+layout_mode = 2
+
+[node name="Spam" type="VBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/Spam"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Spam to Block"
+
+[node name="HFlowContainer" type="HFlowContainer" parent="Control/VBoxContainer/Spam"]
+layout_mode = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(646, 358)
+
+[node name="Completion" type="ColorRect" parent="."]
+visible = false
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 1288.0
+offset_bottom = 728.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+color = Color(0, 0, 0, 0.533333)
+script = ExtResource("10_likmf")
+level_controller = NodePath("../Control")
+match_grids = Array[NodePath]([NodePath("../Office"), NodePath("../Internet")])
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Completion"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = -20.0
+offset_right = 103.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Completion/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Time to clock out!"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Completion/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Completion"
+
+[node name="Completion" type="TextureProgressBar" parent="Completion/VBoxContainer"]
+layout_mode = 2
+value = 100.0
+allow_greater = true
+texture_under = ExtResource("10_ria44")
+texture_progress = ExtResource("11_fswxq")
+
+[node name="Completion2" type="TextureProgressBar" parent="Completion/VBoxContainer/Completion"]
+modulate = Color(0, 1, 1, 1)
+show_behind_parent = true
+layout_mode = 2
+offset_right = 486.0
+offset_bottom = 50.0
+allow_greater = true
+nine_patch_stretch = true
+stretch_margin_left = 20
+stretch_margin_top = 8
+stretch_margin_right = 20
+stretch_margin_bottom = 8
+texture_progress = ExtResource("11_fswxq")
+
+[node name="Label3" type="Label" parent="Completion/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Efficiency"
+
+[node name="Efficiency" type="TextureProgressBar" parent="Completion/VBoxContainer"]
+layout_mode = 2
+texture_under = ExtResource("10_ria44")
+texture_progress = ExtResource("11_fswxq")
+
+[node name="Label4" type="Label" parent="Completion/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Security"
+
+[node name="Security" type="TextureProgressBar" parent="Completion/VBoxContainer"]
+layout_mode = 2
+max_value = 10.0
+texture_under = ExtResource("10_ria44")
+texture_progress = ExtResource("11_fswxq")
+
+[node name="Stars" type="TextureProgressBar" parent="Completion/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+max_value = 3.0
+texture_under = ExtResource("13_20ape")
+texture_progress = ExtResource("14_khye8")
+
+[node name="LevelSelect" type="Button" parent="Completion/VBoxContainer"]
+layout_mode = 2
+text = "Back To Calendar"
+script = SubResource("GDScript_i4ef8")
+
+[node name="Restart" type="Button" parent="Completion/VBoxContainer"]
+layout_mode = 2
+text = "Retry"
+script = SubResource("GDScript_skkop")
+
+[node name="FlowSlowdown" type="Node" parent="."]
+script = ExtResource("16_x81m8")
+
+[connection signal="flow_reset" from="." to="Office" method="_on_level_flow_reset"]
+[connection signal="flow_reset" from="." to="Internet" method="_on_level_flow_reset"]
+[connection signal="flow_reset" from="." to="FlowSlowdown" method="reset_slowdown"]
+[connection signal="pressed" from="Router/Button" to="Router" method="refresh_internet"]
+[connection signal="toggled" from="Computer back4/HBoxContainer/Button" to="Office" method="set_grid_enabled"]
+[connection signal="toggled" from="Computer back4/HBoxContainer/Button2" to="Internet" method="set_grid_enabled"]
+[connection signal="combo_level_increased" from="Office" to="." method="_on_combo_level_increased"]
+[connection signal="combo_level_reset" from="Office" to="." method="_on_combo_level_reset"]
+[connection signal="icon_popped" from="Office" to="Control" method="_on_match_3_grid_icon_popped"]
+[connection signal="move_used" from="Office" to="." method="_on_move_used"]
+[connection signal="icon_popped" from="Internet" to="Control" method="_on_match_3_grid_icon_popped"]
+[connection signal="move_used" from="Internet" to="." method="_on_move_used"]
+[connection signal="set_enabled" from="Internet" to="Router" method="_on_internet_set_enabled"]
+[connection signal="type_popped" from="Control" to="." method="remove_type"]
+[connection signal="type_popped" from="Control" to="Office" method="pop_all_of_type"]
+[connection signal="pressed" from="Completion/VBoxContainer/LevelSelect" to="Completion/VBoxContainer/LevelSelect" method="_on_pressed"]
+[connection signal="pressed" from="Completion/VBoxContainer/Restart" to="Completion/VBoxContainer/Restart" method="_on_pressed"]

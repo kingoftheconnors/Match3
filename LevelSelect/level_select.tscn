@@ -1,0 +1,97 @@
+[gd_scene load_steps=7 format=3 uid="uid://ctskiy5pvd0ud"]
+
+[ext_resource type="Script" path="res://LevelSelect/level_selector.gd" id="1_dkp7p"]
+[ext_resource type="Texture2D" uid="uid://dbv02ypb587k6" path="res://LevelSelect/whiteboard.jpeg" id="1_kswrf"]
+[ext_resource type="PackedScene" uid="uid://vsqpl460ld42" path="res://Levels/Level_1.tscn" id="2_nq26l"]
+[ext_resource type="PackedScene" uid="uid://dukkkhc7ycqfm" path="res://Levels/Level_2.tscn" id="3_8ruca"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jxy8a"]
+bg_color = Color(1, 1, 1, 0.513726)
+shadow_size = 2
+shadow_offset = Vector2(-2, 2)
+
+[sub_resource type="Theme" id="Theme_am0lq"]
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/styles/normal = SubResource("StyleBoxFlat_jxy8a")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_am0lq")
+
+[node name="Whiteboard" type="Sprite2D" parent="."]
+position = Vector2(637, 363)
+scale = Vector2(0.641534, 0.641534)
+texture = ExtResource("1_kswrf")
+
+[node name="Level 1" type="Button" parent="."]
+layout_mode = 0
+offset_left = 335.0
+offset_top = 217.0
+offset_right = 458.965
+offset_bottom = 317.0
+text = "Level 1"
+script = ExtResource("1_dkp7p")
+level = ExtResource("2_nq26l")
+
+[node name="Button3" type="Button" parent="."]
+layout_mode = 0
+offset_left = 575.0
+offset_top = 217.0
+offset_right = 698.965
+offset_bottom = 317.0
+disabled = true
+
+[node name="Cutscene" type="Button" parent="Button3"]
+layout_mode = 0
+offset_left = -12.0
+offset_top = 8.0
+offset_right = 126.0
+offset_bottom = 120.0
+rotation = -0.1875
+text = "Cutscene"
+
+[node name="Level 2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 815.0
+offset_top = 217.0
+offset_right = 938.965
+offset_bottom = 317.0
+text = "Level 2"
+script = ExtResource("1_dkp7p")
+level = ExtResource("3_8ruca")
+
+[node name="Level 3" type="Button" parent="."]
+layout_mode = 0
+offset_left = 458.0
+offset_top = 316.0
+offset_right = 581.965
+offset_bottom = 416.0
+text = "Level 3"
+script = ExtResource("1_dkp7p")
+
+[node name="Level 4" type="Button" parent="."]
+layout_mode = 0
+offset_left = 818.0
+offset_top = 316.0
+offset_right = 941.965
+offset_bottom = 416.0
+text = "Level 4"
+script = ExtResource("1_dkp7p")
+
+[node name="Level 5" type="Button" parent="."]
+layout_mode = 0
+offset_left = 938.0
+offset_top = 314.0
+offset_right = 1061.96
+offset_bottom = 414.0
+text = "Level 5"
+script = ExtResource("1_dkp7p")

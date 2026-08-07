@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://chpffd45g6a6a"]
+
+[ext_resource type="Texture2D" uid="uid://bg8xm1bfr2d5j" path="res://OfficeIcons/ProgressBar.png" id="1_ynha4"]
+[ext_resource type="Texture2D" uid="uid://ckdfwv748or7j" path="res://OfficeIcons/ProgressBarFull.png" id="2_68c4r"]
+
+[node name="EXPProgress" type="TextureProgressBar"]
+offset_right = 72.0
+offset_bottom = 50.0
+size_flags_horizontal = 0
+allow_greater = true
+nine_patch_stretch = true
+stretch_margin_left = 20
+stretch_margin_top = 24
+stretch_margin_right = 4
+stretch_margin_bottom = 24
+texture_under = ExtResource("1_ynha4")
+texture_progress = ExtResource("2_68c4r")
