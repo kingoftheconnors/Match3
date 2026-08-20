@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cy4di06y1m8gn"]
+
+[ext_resource type="Texture2D" uid="uid://dx0j1kqhvjof8" path="res://Office/adware.png" id="1_ekqsx"]
+[ext_resource type="Script" path="res://Office/office_grid_piece.gd" id="2_k0nbr"]
+
+[node name="GridPiece" type="Sprite2D"]
+scale = Vector2(0.155, 0.155)
+texture = ExtResource("1_ekqsx")
+script = ExtResource("2_k0nbr")

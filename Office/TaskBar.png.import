@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bs5l0tdde4ofr"
-path="res://.godot/imported/ProgressBarFull-extended.png-c47d5afbf8830f4698716c7109ed031d.ctex"
+uid="uid://ba07sr0f7di0f"
+path="res://.godot/imported/TaskBar.png-54a91ff4291689d5c39660d314b09744.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://OfficeIcons/ProgressBarFull-extended.png"
-dest_files=["res://.godot/imported/ProgressBarFull-extended.png-c47d5afbf8830f4698716c7109ed031d.ctex"]
+source_file="res://Office/TaskBar.png"
+dest_files=["res://.godot/imported/TaskBar.png-54a91ff4291689d5c39660d314b09744.ctex"]
 
 [params]
 

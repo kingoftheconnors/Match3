@@ -6,5 +6,8 @@
 
 [node name="Level" parent="." instance=ExtResource("1_eqe1w")]
 piece_types = Array[int]([8, 11, 10, 13, 14, 15])
-poppables = Array[int]([8, 11])
-efficiency_goal = 2
+obstacles = Array[int]([])
+poppables = Array[int]([])
+efficiency_goal = 3
+goals_to_win = 30
+is_internet_active = false

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwrx155ihmcit"
-path="res://.godot/imported/marketing.png-31d141f0f6c9c3858a08a848978a115d.ctex"
+uid="uid://dh8pc41jjfr10"
+path="res://.godot/imported/bug.png-1f31b6b5353abdddd8c4f8bfaf03ac46.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://OfficeIcons/marketing.png"
-dest_files=["res://.godot/imported/marketing.png-31d141f0f6c9c3858a08a848978a115d.ctex"]
+source_file="res://Office/bug.png"
+dest_files=["res://.godot/imported/bug.png-1f31b6b5353abdddd8c4f8bfaf03ac46.ctex"]
 
 [params]
 

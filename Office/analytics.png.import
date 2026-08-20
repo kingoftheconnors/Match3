@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cigh80dpddqby"
-path="res://.godot/imported/TaskBar-process.png-989d5fabfa9e7ff47a4f52af0b2c8425.ctex"
+uid="uid://cnn0fjd3mrm1k"
+path="res://.godot/imported/analytics.png-8543f235aca26bdf9a3578e3de666e21.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://OfficeIcons/TaskBar-process.png"
-dest_files=["res://.godot/imported/TaskBar-process.png-989d5fabfa9e7ff47a4f52af0b2c8425.ctex"]
+source_file="res://Office/analytics.png"
+dest_files=["res://.godot/imported/analytics.png-8543f235aca26bdf9a3578e3de666e21.ctex"]
 
 [params]
 

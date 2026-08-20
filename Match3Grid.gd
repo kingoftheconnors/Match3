@@ -2,19 +2,19 @@ extends Node2D
 
 @export var grid_piece : PackedScene
 
-signal icon_popped(type : grid_piece.PIECE_TYPE)
+signal icon_popped(type : grid_piece.PIECE_TYPE, group_size : int)
 signal move_used
 signal set_enabled(flag : bool)
 signal combo_level_increased
 signal combo_level_reset
 
-func add_piece_to_column(x):
+func add_piece_to_column(x, is_initial_setup : bool = false):
 	var new_piece = grid_piece.instantiate()
 	if loaded_pieces.size() > 0:
 		var type = loaded_pieces.pop_at(randi()%loaded_pieces.size())
-		new_piece.initialize(type, self)
+		new_piece.initialize(type, self, is_initial_setup)
 	else:
-		new_piece.initialize(get_piece_types()[randi()%get_piece_types().size()], self)
+		new_piece.initialize(get_piece_types()[randi()%get_piece_types().size()], self, is_initial_setup)
 	new_piece.position = Vector2(x*piece_size.x+piece_size.x/2, (-board_size.y-2)*piece_size.y)
 	board[x].append(new_piece)
 	add_child(new_piece)
@@ -25,13 +25,13 @@ func add_piece_to_column(x):
 var board : Array[Array]
 
 func _ready():
-	scale.x = 5.5/board_size.x
-	scale.y = 5.5/board_size.y
+	scale.x = 5.25/board_size.x
+	scale.y = 5.25/board_size.y
 	
 	for i in board_size.x:
 		board.append([])
 		for j in board_size.y:
-			add_piece_to_column(i)
+			add_piece_to_column(i, true)
 	var grid_has_matches : bool = true
 	var resort_tries : int = 3
 	while grid_has_matches and resort_tries > 0:
@@ -41,7 +41,7 @@ func _ready():
 			for y in range(board_size.y):
 				var group = get_group(Vector2i(x,y), [])
 				if group.size() >= 3:
-					board[x][y].initialize(get_piece_types()[randi()%get_piece_types().size()], self)
+					board[x][y].initialize(get_piece_types()[randi()%get_piece_types().size()], self, true)
 					grid_has_matches = true
 
 func reset():
@@ -82,9 +82,9 @@ func _process(delta):
 			if board[x][y].is_popped():
 				continue
 			var group = get_group(Vector2i(x,y), [])
-			if group.size() >= 3:
+			if group.size() >= get_required_group_size_for_type(board[x][y].type) and get_parent().is_game_active():
 				for pos in group:
-					pop_piece(pos)
+					pop_piece(pos, group.size())
 					if selected_piece == pos:
 						reset_selected_piece()
 				is_combo_still_going = true
@@ -106,12 +106,26 @@ func _process(delta):
 		while board[x].size() < board_size.y:
 			add_piece_to_column(x)
 
+func has_poppable_groups() -> bool:
+	for x in range(board_size.x):
+		for y in range(board_size.y):
+			var group = get_group(Vector2i(x,y), [])
+			if group.size() >= get_required_group_size_for_type(board[x][y].type):
+				return true
+	return false
+
 func find_piece_position(piece) -> Vector2i:
 	for x in range(board_size.x):
 		for y in range(board_size.y):
 			if board[x][y] == piece:
 				return Vector2i(x, y)
 	return Vector2i(-1, -1)
+
+func get_required_group_size_for_type(type : grid_piece.PIECE_TYPE) -> int:
+	if type in get_parent().goals:
+		return get_parent().goal_minimum_pop_size
+	else:
+		return 3
 
 func get_group(pos : Vector2i, current_group : Array[Vector2i]) -> Array[Vector2i]:
 	current_group.append(pos)
@@ -130,6 +144,11 @@ func get_group(pos : Vector2i, current_group : Array[Vector2i]) -> Array[Vector2
 var piece_size = Vector2i(100, 100)
 func get_piece_size() -> Vector2i:
 	return piece_size
+func get_speed_ratio():
+	if get_parent().is_slow_generation:
+		return 0.5
+	else:
+		return 1.0
 
 var selected_piece : Vector2i = Vector2i(-1,-1)
 func _input(event):
@@ -153,7 +172,8 @@ func _input(event):
 						board[grid_pos.x][grid_pos.y] = board[selected_piece.x][selected_piece.y]
 						board[selected_piece.x][selected_piece.y] = swap_piece
 						# Swap back if failed to make a match
-						if (get_group(grid_pos, []).size() < 3 and get_group(selected_piece, []).size() < 3):
+						if (get_group(grid_pos, []).size() < get_required_group_size_for_type(board[grid_pos.x][grid_pos.y].type) \
+							and get_group(selected_piece, []).size() < get_required_group_size_for_type(board[selected_piece.x][selected_piece.y].type)):
 							swap_piece = board[grid_pos.x][grid_pos.y]
 							board[grid_pos.x][grid_pos.y] = board[selected_piece.x][selected_piece.y]
 							board[selected_piece.x][selected_piece.y] = swap_piece
@@ -168,7 +188,10 @@ func _input(event):
 			board[selected_pos.x][selected_pos.y].process_movement(0.01, board[selected_pos.x][selected_pos.y-1] if selected_piece.y > 0 else null)
 
 func set_grid_enabled(flag : bool):
-	visible = flag
+	if flag:
+		z_index = 1
+	else:
+		z_index = 0
 	emit_signal("set_enabled", flag)
 
 func is_settling():
@@ -178,17 +201,17 @@ func is_settling():
 				return true
 	return false
 
-func pop_piece(pos : Vector2):
+func pop_piece(pos : Vector2, group_size):
 	if board[pos.x][pos.y].is_popped() == false:
 		board[pos.x][pos.y].mark_popped()
 		var type = board[pos.x][pos.y].type
-		emit_signal("icon_popped", type)
+		emit_signal("icon_popped", type, group_size)
 
 func pop_all_of_type(type : grid_piece.PIECE_TYPE):
 	for x in range(board_size.x):
 		for y in range(board_size.y):
 			if board[x][y].type == type:
-				pop_piece(Vector2(x, y))
+				pop_piece(Vector2(x, y), 1)
 
 func get_grid_position(position) -> Vector2i:
 	if position.y > 0 or position.x < 0:
@@ -210,6 +233,17 @@ func get_obstacles():
 	return get_parent().obstacles
 func get_poppables():
 	return get_parent().poppables
+func get_extras():
+	var extras = []
+	for p in get_parent().piece_types + get_parent().internet_piece_types:
+		if p in get_parent().goals:
+			continue
+		if p in get_parent().obstacles:
+			continue
+		if p in get_parent().poppables:
+			continue
+		extras.append(p)
+	return extras
 func get_piece_types():
 	return get_parent().piece_types
 

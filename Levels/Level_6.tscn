@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dck2agbl708b0"]
+
+[ext_resource type="PackedScene" uid="uid://cgqiegoofee3" path="res://Basic_Level.tscn" id="1_tlp3b"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Level" parent="." instance=ExtResource("1_tlp3b")]
+piece_types = Array[int]([8, 10, 17, 16, 14, 20, 23, 22])
+internet_piece_types = Array[int]([8, 9, 10, 11, 12, 13, 15, 19])
+goals = Array[int]([14, 20, 23])
+obstacles = Array[int]([])
+poppables = Array[int]([8, 10])
+moves = 10
+goals_to_win = 20
+is_slow_generation = true

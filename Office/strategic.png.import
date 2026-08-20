@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://degvuysxtbchu"
-path="res://.godot/imported/blueprint.png-2f53f02247d74576b9ab26391409fc6a.ctex"
+uid="uid://bmo6cevtygrvv"
+path="res://.godot/imported/strategic.png-95e37ebad6423792e8abb68cc23a38da.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://OfficeIcons/blueprint.png"
-dest_files=["res://.godot/imported/blueprint.png-2f53f02247d74576b9ab26391409fc6a.ctex"]
+source_file="res://Office/strategic.png"
+dest_files=["res://.godot/imported/strategic.png-95e37ebad6423792e8abb68cc23a38da.ctex"]
 
 [params]
 

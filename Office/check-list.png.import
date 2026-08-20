@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ba07sr0f7di0f"
-path="res://.godot/imported/TaskBar.png-e506a48d7f98316203bf1e7b9d58266d.ctex"
+uid="uid://cb4k3mo4v5ahy"
+path="res://.godot/imported/check-list.png-d3b200e29f300399b0db95aa8ab35d31.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://OfficeIcons/TaskBar.png"
-dest_files=["res://.godot/imported/TaskBar.png-e506a48d7f98316203bf1e7b9d58266d.ctex"]
+source_file="res://Office/check-list.png"
+dest_files=["res://.godot/imported/check-list.png-d3b200e29f300399b0db95aa8ab35d31.ctex"]
 
 [params]
 

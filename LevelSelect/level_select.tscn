@@ -1,9 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://ctskiy5pvd0ud"]
+[gd_scene load_steps=13 format=3 uid="uid://ctskiy5pvd0ud"]
 
 [ext_resource type="Script" path="res://LevelSelect/level_selector.gd" id="1_dkp7p"]
 [ext_resource type="Texture2D" uid="uid://dbv02ypb587k6" path="res://LevelSelect/whiteboard.jpeg" id="1_kswrf"]
 [ext_resource type="PackedScene" uid="uid://vsqpl460ld42" path="res://Levels/Level_1.tscn" id="2_nq26l"]
 [ext_resource type="PackedScene" uid="uid://dukkkhc7ycqfm" path="res://Levels/Level_2.tscn" id="3_8ruca"]
+[ext_resource type="PackedScene" uid="uid://c61730cc75hq0" path="res://Levels/Level_3.tscn" id="5_2cyd1"]
+[ext_resource type="PackedScene" uid="uid://dqthj1ntnnqt5" path="res://Levels/Level_3_Challenge.tscn" id="6_wqgtm"]
+[ext_resource type="PackedScene" uid="uid://wxyw6wye67ik" path="res://Levels/Level_4.tscn" id="7_1rv4l"]
+[ext_resource type="PackedScene" uid="uid://drx21ktgynthc" path="res://Levels/Level_5.tscn" id="8_csllh"]
+[ext_resource type="PackedScene" uid="uid://dck2agbl708b0" path="res://Levels/Level_6.tscn" id="9_xx58p"]
+[ext_resource type="PackedScene" uid="uid://dwbc86keb348s" path="res://Levels/Level_6_Challenge.tscn" id="10_x0um0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jxy8a"]
 bg_color = Color(1, 1, 1, 0.513726)
@@ -34,15 +40,26 @@ texture = ExtResource("1_kswrf")
 
 [node name="Level 1" type="Button" parent="."]
 layout_mode = 0
-offset_left = 335.0
-offset_top = 217.0
-offset_right = 458.965
-offset_bottom = 317.0
+offset_left = 336.0
+offset_top = 216.0
+offset_right = 457.0
+offset_bottom = 316.0
 text = "Level 1"
 script = ExtResource("1_dkp7p")
 level = ExtResource("2_nq26l")
 
+[node name="Level 2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 457.0
+offset_top = 216.0
+offset_right = 578.0
+offset_bottom = 316.0
+text = "Level 2"
+script = ExtResource("1_dkp7p")
+level = ExtResource("3_8ruca")
+
 [node name="Button3" type="Button" parent="."]
+z_index = 1
 layout_mode = 0
 offset_left = 575.0
 offset_top = 217.0
@@ -52,46 +69,87 @@ disabled = true
 
 [node name="Cutscene" type="Button" parent="Button3"]
 layout_mode = 0
-offset_left = -12.0
-offset_top = 8.0
-offset_right = 126.0
-offset_bottom = 120.0
+offset_left = -5.0
+offset_top = 10.0
+offset_right = 121.0
+offset_bottom = 110.0
 rotation = -0.1875
 text = "Cutscene"
 
-[node name="Level 2" type="Button" parent="."]
-layout_mode = 0
-offset_left = 815.0
-offset_top = 217.0
-offset_right = 938.965
-offset_bottom = 317.0
-text = "Level 2"
-script = ExtResource("1_dkp7p")
-level = ExtResource("3_8ruca")
-
 [node name="Level 3" type="Button" parent="."]
 layout_mode = 0
-offset_left = 458.0
-offset_top = 316.0
-offset_right = 581.965
-offset_bottom = 416.0
+offset_left = 696.0
+offset_top = 216.0
+offset_right = 817.0
+offset_bottom = 316.0
 text = "Level 3"
 script = ExtResource("1_dkp7p")
+level = ExtResource("5_2cyd1")
+
+[node name="Challenge 1" type="Button" parent="."]
+layout_mode = 0
+offset_left = 817.0
+offset_top = 216.0
+offset_right = 938.0
+offset_bottom = 316.0
+text = "Challenge 1"
+script = ExtResource("1_dkp7p")
+level = ExtResource("6_wqgtm")
 
 [node name="Level 4" type="Button" parent="."]
 layout_mode = 0
-offset_left = 818.0
+offset_left = 336.0
 offset_top = 316.0
-offset_right = 941.965
+offset_right = 457.0
 offset_bottom = 416.0
 text = "Level 4"
 script = ExtResource("1_dkp7p")
+level = ExtResource("7_1rv4l")
 
 [node name="Level 5" type="Button" parent="."]
 layout_mode = 0
-offset_left = 938.0
-offset_top = 314.0
-offset_right = 1061.96
-offset_bottom = 414.0
+offset_left = 457.0
+offset_top = 316.0
+offset_right = 578.0
+offset_bottom = 416.0
 text = "Level 5"
 script = ExtResource("1_dkp7p")
+level = ExtResource("8_csllh")
+
+[node name="Button4" type="Button" parent="."]
+z_index = 1
+layout_mode = 0
+offset_left = 575.0
+offset_top = 317.0
+offset_right = 698.965
+offset_bottom = 417.0
+disabled = true
+
+[node name="Cutscene" type="Button" parent="Button4"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = -6.0
+offset_right = 132.0
+offset_bottom = 94.0
+rotation = 0.0930708
+text = "Cutscene"
+
+[node name="Level 6" type="Button" parent="."]
+layout_mode = 0
+offset_left = 696.0
+offset_top = 316.0
+offset_right = 817.0
+offset_bottom = 416.0
+text = "Level 6"
+script = ExtResource("1_dkp7p")
+level = ExtResource("9_xx58p")
+
+[node name="Challenge 2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 817.0
+offset_top = 316.0
+offset_right = 938.0
+offset_bottom = 416.0
+text = "Challenge 2"
+script = ExtResource("1_dkp7p")
+level = ExtResource("10_x0um0")

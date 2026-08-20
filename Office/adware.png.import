@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cb4k3mo4v5ahy"
-path="res://.godot/imported/check-list.png-ae0b2e2775cdc8ee18d1a9be703cf820.ctex"
+uid="uid://dx0j1kqhvjof8"
+path="res://.godot/imported/adware.png-2fd4d89d7f11f01220211e7e2f5648c9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://OfficeIcons/check-list.png"
-dest_files=["res://.godot/imported/check-list.png-ae0b2e2775cdc8ee18d1a9be703cf820.ctex"]
+source_file="res://Office/adware.png"
+dest_files=["res://.godot/imported/adware.png-2fd4d89d7f11f01220211e7e2f5648c9.ctex"]
 
 [params]
 

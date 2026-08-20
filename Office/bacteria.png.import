@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://becx1qv5mytvs"
-path="res://.godot/imported/scam.png-011747ed21ea71200223a8f2201db59f.ctex"
+uid="uid://l750cpqn3rxx"
+path="res://.godot/imported/bacteria.png-1b407e0db8e9e05f636ac2cec8b10d59.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://OfficeIcons/scam.png"
-dest_files=["res://.godot/imported/scam.png-011747ed21ea71200223a8f2201db59f.ctex"]
+source_file="res://Office/bacteria.png"
+dest_files=["res://.godot/imported/bacteria.png-1b407e0db8e9e05f636ac2cec8b10d59.ctex"]
 
 [params]
 

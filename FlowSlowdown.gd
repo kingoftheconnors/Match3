@@ -8,3 +8,7 @@ func _input(event):
 
 func reset_slowdown():
 	Engine.time_scale = 1.0
+
+func _on_level_flow_increased(flow):
+	if Input.is_action_pressed("slowdown"):
+		Engine.time_scale = 0.25

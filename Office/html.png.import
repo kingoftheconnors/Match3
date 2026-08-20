@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dx0j1kqhvjof8"
-path="res://.godot/imported/adware.png-9c5e732a59175215ee20fc8b11c1e8ca.ctex"
+uid="uid://r1pufwg133el"
+path="res://.godot/imported/html.png-1f17eb8417d07676a5158f42c36e8a88.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://OfficeIcons/adware.png"
-dest_files=["res://.godot/imported/adware.png-9c5e732a59175215ee20fc8b11c1e8ca.ctex"]
+source_file="res://Office/html.png"
+dest_files=["res://.godot/imported/html.png-1f17eb8417d07676a5158f42c36e8a88.ctex"]
 
 [params]
 

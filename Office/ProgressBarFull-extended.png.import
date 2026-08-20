@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drbdj5qj0cg3i"
-path="res://.godot/imported/strategy.png-d9af804714f0da54d77adb404a71334a.ctex"
+uid="uid://bs5l0tdde4ofr"
+path="res://.godot/imported/ProgressBarFull-extended.png-b6afc942b2b40e984612c3d13ea08cd6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://OfficeIcons/strategy.png"
-dest_files=["res://.godot/imported/strategy.png-d9af804714f0da54d77adb404a71334a.ctex"]
+source_file="res://Office/ProgressBarFull-extended.png"
+dest_files=["res://.godot/imported/ProgressBarFull-extended.png-b6afc942b2b40e984612c3d13ea08cd6.ctex"]
 
 [params]
 

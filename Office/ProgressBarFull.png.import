@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdbq4h4emh53x"
-path="res://.godot/imported/puzzle.png-684aca009c0f52bb7d49e402915c619d.ctex"
+uid="uid://ckdfwv748or7j"
+path="res://.godot/imported/ProgressBarFull.png-9a6cdbf754a18b1fe64df6f98496e321.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://OfficeIcons/puzzle.png"
-dest_files=["res://.godot/imported/puzzle.png-684aca009c0f52bb7d49e402915c619d.ctex"]
+source_file="res://Office/ProgressBarFull.png"
+dest_files=["res://.godot/imported/ProgressBarFull.png-9a6cdbf754a18b1fe64df6f98496e321.ctex"]
 
 [params]
 

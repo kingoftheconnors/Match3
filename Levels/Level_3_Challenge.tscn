@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqthj1ntnnqt5"]
+
+[ext_resource type="PackedScene" uid="uid://cgqiegoofee3" path="res://Basic_Level.tscn" id="1_7d1d3"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Level" parent="." instance=ExtResource("1_7d1d3")]
+piece_types = Array[int]([8, 11, 13, 14, 15, 10, 16])
+obstacles = Array[int]([])
+moves = 1
+efficiency_goal = 0
+is_internet_active = false

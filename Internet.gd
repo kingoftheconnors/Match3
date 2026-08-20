@@ -1,13 +1,16 @@
 extends "../Match3Grid.gd"
 
-@export var piece_types : Array[grid_piece.PIECE_TYPE]
-@export var num_refreshes : int = 3
-
 func refresh_internet():
 	if visible:
-		if num_refreshes > 0:
+		if get_parent().num_refreshes > 0:
 			reset()
-		num_refreshes -= 1
+		get_parent().num_refreshes -= 1
 
 func get_piece_types():
-	return piece_types
+	return get_parent().internet_piece_types
+
+func get_speed_ratio():
+	if get_parent().is_slow_generation:
+		return 0.3
+	else:
+		return 0.7
