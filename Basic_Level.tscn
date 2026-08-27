@@ -476,7 +476,6 @@ script = ExtResource("16_x81m8")
 [connection signal="flow_increased" from="." to="FlowSlowdown" method="_on_level_flow_increased"]
 [connection signal="flow_reset" from="." to="Office" method="_on_level_flow_reset"]
 [connection signal="flow_reset" from="." to="Internet" method="_on_level_flow_reset"]
-[connection signal="flow_reset" from="." to="FlowSlowdown" method="reset_slowdown"]
 [connection signal="pressed" from="Router/Button" to="Router" method="refresh_internet"]
 [connection signal="toggled" from="Computer back4/HBoxContainer/Button" to="Office" method="set_grid_enabled"]
 [connection signal="toggled" from="Computer back4/HBoxContainer/Button2" to="Internet" method="set_grid_enabled"]

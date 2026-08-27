@@ -1,0 +1,156 @@
+Days to Work on: 10 hours:
+Goal: Make an office match 3 game with at least 5 levels
+
+Day 6: Levels
+	BUG: You can move pieces at 0 moves and 0 flow, causing -1 moves
+
+	WEEK 3:
+	IF YOU'VE SUCCEEDED LONG TERM OFFICE GOAL:
+	Introduction to Viruses (on office and internet. Office is clean)
+		Introduce another long-term goal of removing viruses (research on internet)
+	Viruses all over the internet! Easy to get combos going in office (after clearing spam), but all goals are in internet! Use flow
+	WEDNESDAY CUTSCENE: GET CONTACTED BY HACKER
+	CHALLENGE: Multitasking viruses and office. Two goals, one on each, viruses on both, and using refresh to stop virus combos
+	SUPER CHALLENGE: It's only goal, virus, and 3 spam. AVOID dropping spam to get small amount of goal required manually
+
+	WEEK 4:
+	IF YOU'VE SUCCEEDED LONG TERM INTERNET GOAL:
+	Introduction to data processing. New type of node, that requires four in a group to pop! Get rid of spam first
+	Super-spam! You can pop it with 3s, but getting it to count as points requires groups of 4 or more!
+	WEDNESDAY CUTSCENE: GET OFFERED A BETTER-PAYING JOB. TURN IT DOWN
+	CHALLENGE: Last-minute data processing before meeting! Two super-spams, viruses in internet, and slow node generation and few moves!
+	SUPER CHALLENGE: Proposal accepted! Get 4 goals and 3 spam! 1 virus in internet
+
+	WEEK 5:
+	IF YOU'VE SUCCEEDED UNINSTALLING VIRUSES:
+	Hacker contacts you and offers you a lot of money to let him have that data (otherwise he just takes it)
+Day 7: Story
+	Add code for long-term goals (getting stars on levels gives a +5 to all active goals)
+		Value of long-term goals is visible on bottom, and stars is visible on each level
+		Make third star getting max amount of "goal" in each level. So those runaway levels can't get more than max goal in their level
+
+	Develop in-level cutscene system
+		Slack messages from Support?
+		You can read and refer to the slack channel any time (extra option on bottom row). You have three options for each message
+		Introducing long-term goals
+		Tutorial in first level teaching flow (code it so incoming nodes will be 100% of a useless type, so you have infinite matches and so infinite time to test flow)
+	Add each Wednesday cutscene
+	Add long-term goal guards
+Day 8:
+	Sfx
+	Visual Polish
+		Different fx for useful pops vs unuseful one (they just swipe off-screen to the right?)
+		Special FX for maxing out spam (and make spam start to shake when it's one combo away?)
+		Combos fx, and speeding up dropping of icons as combo speeds up
+		Certain combo level gets pop-up "Flow State" (where you unlock the ability to slow down time and delete rows with a move? Or do a free move?)
+		Have "Office" and "Internet" buttons shake for each pop that goes on inside them
+		Add a box that shows tabulated list of data coming in from the internet?
+		When a goal has been completed, the icon color changes (more gray?) and gets a check-mark over it
+	Accessibility:
+		Total Focus (time stops completely when focusing)
+		Toggle focus (you can turn it on and off with a press rather than holding)
+Day 9:
+	Credits (with icon attribution)
+
+Levels:
+	WEEK 1:
+	Introduction to "Flow State" and long-term goal
+		Hinting early on that long-term goals are required
+	Introduction to "Spam Blocking"
+		Meet support team. They got you a spam blocker. Asks for lunch sometime
+	WEDNESDAY CUTSCENE: Lunch w/ Support. Talk about work ethic. Get "hazed" by being asked funny questions
+	CHALLENGE: (lots of spam. Very satisfying)
+	SUPER CHALLENGE: Do it all in one move
+
+	WEEK 2:
+	Introduction to "Internet" and reseting internet w/ flow (implied use internet ONLY today. If you learn to use office in combo, good for you!)
+		Introduction of new long-term goal (internet-only)
+	Comboing between Internet and Office (two goals, one on office, one on internet)
+	WEDNESDAY CUTSCENE: Meet the Boss
+	CHALLENGE: "Slow computer", where all nodes generate slowly, helping you to hold a combo in both internet and office BUT half as many moves
+	SUPER CHALLENGE: 
+
+	WEEK 3:
+	IF YOU'VE SUCCEEDED LONG TERM OFFICE GOAL:
+	Introduction to Viruses (on office and internet. Office is clean)
+		Introduce another long-term goal of removing viruses (research on internet)
+	Viruses all over the internet! Easy to get combos going in office (after clearing spam), but all goals are in internet! Use flow
+	WEDNESDAY CUTSCENE: GET CONTACTED BY HACKER
+	CHALLENGE: Multitasking viruses and office. Two goals, one on each, viruses on both, and using refresh to stop virus combos
+	SUPER CHALLENGE: It's only goal, virus, and 3 spam. AVOID dropping spam to get small amount of goal required manually
+
+	WEEK 4:
+	IF YOU'VE SUCCEEDED LONG TERM INTERNET GOAL:
+	Introduction to data processing. New type of node, that requires four in a group to pop! Get rid of spam first
+	Super-spam! You can pop it with 3s, but getting it to count as points requires groups of 4 or more!
+	WEDNESDAY CUTSCENE: GET OFFERED A BETTER-PAYING JOB. TURN IT DOWN
+	CHALLENGE: Last-minute data processing before meeting! Two super-spams, viruses in internet, and slow node generation and few moves!
+	SUPER CHALLENGE: Proposal accepted! Get 4 goals and 3 spam! 1 virus in internet
+
+	WEEK 5:
+	IF YOU'VE SUCCEEDED UNINSTALLING VIRUSES:
+	Hacker contacts you and offers you a lot of money to let him have that data (otherwise he just takes it)
+
+Office Space Match 3:
+The last secretary was fired for incompetence. Everything in the computer is a mess. Do you have what it takes to support the company while cleaning your machine?
+Massive backlog of records to validate (long-term challenge)
+Each level has particular goals (get match 5s, get blues, etc, etc). You get scored for how much of that goal you get compared to how many moves you need
+Busywork combos vs Actual Productivity
+Discussion about how serving the work and believing in the product makes all the difference? Compare with coworker who just prints out so much pointless fluff and CANNOT deliver in the moment of crisis
+
+
+Why are you putting so much effort into this?
+	I want money [this is way past money. Why can't you just keep quiet and take your check?]
+	I love a challenge
+	I want to help people
+	I want to do things the right way
+	This is a video game. I'd never work this hard in the real world.
+
+Major feature: THE INTERNET
+When gathering information from the internet, you go into a match-three game on the internet.
+	Bigger?
+	Things mutate/change/pop automatically after each move?
+	Dodge ads?
+	3-dimensional match 3?
+	Unlimited "clean boards", so you're encouraged to figure out when a board is worth it or not?
+	Changes over time. You may be better off spending time on your main work and then going back to the internet later
+This should hold the same "cozy office life" vibe, so it shouldn't be stressful or that hard.
+
+Game leads up to a board meeting where you pitch something?
+
+
+If you get a certain amount of score in a certain spam type, it gets "blocked" or "reported"
+You can retry certain levels to get a better score in each type
+
+Some levels can have bigger boards, some can have smaller
+During one level, the office has been "hacked" and you have to deal with that first
+You go on a vacation and you inbox is flooded with spam you have to go through first thing
+There's an incident at work and you have to help the Support Team handle tickets
+
+Icon Types (icons will be colored based on use in that level. Green for good, red for bad, blue for long-term need, yellow for special effect, gray for everything else):
+They were all actually made by Magnific?
+Records to validate [Blueprint: "Icon made by Freepik from www.flaticon.com"]
+Exported data [Study: "Icon made by Freepik from www.flaticon.com"]
+Contact Info [Strategic: "Icon made by Freepik from www.flaticon.com"]
+	https://www.flaticon.com/free-icon/secretary_5618128
+Support Tickets [Puzzle: "Icon made by Freepik from www.flaticon.com"]
+Interview Applicants [Job-Interview: "Icon made by Freepik from www.flaticon.com"]
+Spam (ads) [adware/marketing: "Icon made by Freepik from www.flaticon.com"]
+Spam (email newsletters) [Checklist: "Icon made by Freepik from www.flaticon.com"]
+Spam (scams) (worth points, but not much) [Scam: "Icon made by Freepik from www.flaticon.com"]
+Virus Emails (don't touch!) [you can delete them from your inbox but it takes part of a move] [Strategy: "Icon made by Freepik from www.flaticon.com"]
+
+Bar on top left for "progress" on each goal (short-term and long-term)
+Analog clock shows how many more moves you have
+
+If you get a FULL row, you can get a "block" or "unsubscribe", node, which if you match with something destroys that entire spam type for the rest of the level. Getting a full row of anything else is just extra progress (although it's an exponential number of points for each increase size)
+
+
+You can click the coffee mug to drink some
+
+
+
+Characters:
+You have one worker who does nothing because it's all "goign to the man"
+You have a manager who's used to nobody putting in effort and legitimately thanks you for trying
+You have customers who really do need the help
