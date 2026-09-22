@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Icon" format=3 uid="uid://d5b1qrqwdift"]
+
+[ext_resource type="Script" uid="uid://ber3dqjdcknif" path="res://icon.gd" id="1_w2vjg"]
+[ext_resource type="Texture2D" uid="uid://bx0pd6mxpfbml" path="res://IconSprites/BasicEnemyAttack.png" id="2_jrkj3"]
+
+[resource]
+script = ExtResource("1_w2vjg")
+texture = ExtResource("2_jrkj3")
+color = 4
+pop_type = 1
+hurt = 1

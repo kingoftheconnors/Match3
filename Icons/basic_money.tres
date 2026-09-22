@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Icon" format=3 uid="uid://dafl4ir3kpod4"]
+
+[ext_resource type="Script" uid="uid://ber3dqjdcknif" path="res://icon.gd" id="1_0rimu"]
+[ext_resource type="Texture2D" uid="uid://d07nrx1rybxv7" path="res://IconSprites/BasicMoney.png" id="2_0rimu"]
+
+[resource]
+script = ExtResource("1_0rimu")
+texture = ExtResource("2_0rimu")
+color = 3
+pop_type = 1
+gold = 1

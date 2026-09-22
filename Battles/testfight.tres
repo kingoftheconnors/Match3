@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Fight" format=3 uid="uid://3tfje0sg8jpl"]
+
+[ext_resource type="Script" uid="uid://dsygbjqmmq5rr" path="res://fight.gd" id="1_cnst4"]
+[ext_resource type="Script" uid="uid://2sv2tv0dbhh8" path="res://enemy.gd" id="1_ctuk3"]
+[ext_resource type="Resource" uid="uid://b5jh1htegjl88" path="res://Enemies/test.tres" id="1_ivdsg"]
+
+[resource]
+script = ExtResource("1_cnst4")
+appears_on_levels = Array[int]([0])
+enemies = Array[ExtResource("1_ctuk3")]([ExtResource("1_ivdsg")])

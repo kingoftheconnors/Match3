@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://hgbet32vbyd7"]
+
+[sub_resource type="GDScript" id="GDScript_06t4h"]
+script/source = "extends Button
+
+func _on_pressed() -> void:
+	SaveManager.clear_data()
+	SaveManager.bag = [
+		preload(\"res://Icons/basic_attack.tres\"),
+		preload(\"res://Icons/basic_attack.tres\"),
+		preload(\"res://Icons/basic_attack.tres\"),
+		preload(\"res://Icons/basic_attack.tres\"),
+		preload(\"res://Icons/basic_attack.tres\"),
+		preload(\"res://Icons/basic_defend.tres\"),
+		preload(\"res://Icons/basic_defend.tres\"),
+		preload(\"res://Icons/basic_defend.tres\"),
+		preload(\"res://Icons/basic_defend.tres\"),
+		preload(\"res://Icons/basic_defend.tres\"),
+		preload(\"res://Icons/basic_money.tres\"),
+		preload(\"res://Icons/basic_money.tres\"),
+		preload(\"res://Icons/basic_money.tres\"),
+		preload(\"res://Icons/basic_money.tres\"),
+		preload(\"res://Icons/basic_super.tres\"),
+	]
+	SaveManager.goto_level(0)
+	# Show map
+	get_tree().change_scene_to_file(\"res://Map.tscn\")
+"
+
+[sub_resource type="GDScript" id="GDScript_7vrkn"]
+script/source = "extends Button
+
+func _on_pressed() -> void:
+	SaveManager.load_game()
+	# Show map
+	get_tree().change_scene_to_file(\"res://Map.tscn\")
+"
+
+[sub_resource type="GDScript" id="GDScript_rhts7"]
+script/source = "extends Button
+
+func _on_pressed() -> void:
+	get_tree().quit()
+"
+
+[node name="Control" type="Control" unique_id=200902053]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="." unique_id=1541439314]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_right = 88.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="HBoxContainer" unique_id=65193224]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "New Run"
+script = SubResource("GDScript_06t4h")
+
+[node name="Button2" type="Button" parent="HBoxContainer" unique_id=1680553151]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "Load Game"
+script = SubResource("GDScript_7vrkn")
+
+[node name="Button3" type="Button" parent="HBoxContainer" unique_id=423387938]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "Quit"
+script = SubResource("GDScript_rhts7")
+
+[connection signal="pressed" from="HBoxContainer/Button" to="HBoxContainer/Button" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/Button2" to="HBoxContainer/Button2" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/Button3" to="HBoxContainer/Button3" method="_on_pressed"]

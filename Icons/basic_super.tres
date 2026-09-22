@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Icon" format=3 uid="uid://caqtwbf4lslu1"]
+
+[ext_resource type="Script" uid="uid://ber3dqjdcknif" path="res://icon.gd" id="1_11tv2"]
+[ext_resource type="Texture2D" uid="uid://3m58a3itc1wu" path="res://IconSprites/BasicSuper.png" id="2_11tv2"]
+
+[resource]
+script = ExtResource("1_11tv2")
+texture = ExtResource("2_11tv2")
+color = 2
+damage = 3

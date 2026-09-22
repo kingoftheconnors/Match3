@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://bu4sbb8kjp4c2"]
+
+[ext_resource type="Script" uid="uid://5obu6mn70msr" path="res://RunMap.gd" id="1_c7s6e"]
+[ext_resource type="Texture2D" uid="uid://brueawnni48pv" path="res://Heart.png" id="2_e0an3"]
+[ext_resource type="Script" uid="uid://dv06rn6gn6a5d" path="res://hud.gd" id="2_p5pve"]
+[ext_resource type="Texture2D" uid="uid://c278rsqvfym2l" path="res://gold.png" id="3_p5pve"]
+
+[node name="Map" type="Node2D" unique_id=1535260287]
+script = ExtResource("1_c7s6e")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=241732577]
+position = Vector2(646, 358)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=252469056]
+layer = 0
+script = ExtResource("2_p5pve")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=1714211779]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer" unique_id=133924143]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MarginContainer/HBoxContainer" unique_id=1778652296]
+layout_mode = 2
+texture = ExtResource("2_e0an3")
+
+[node name="Health" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer" unique_id=1794272248]
+layout_mode = 2
+text = "100/100"
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/MarginContainer/HBoxContainer" unique_id=996088364]
+layout_mode = 2
+texture = ExtResource("3_p5pve")
+
+[node name="Gold" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer" unique_id=1123514804]
+layout_mode = 2
+text = "0"

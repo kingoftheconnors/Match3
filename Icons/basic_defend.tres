@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Icon" format=3 uid="uid://cuf7xme86c7h1"]
+
+[ext_resource type="Script" uid="uid://ber3dqjdcknif" path="res://icon.gd" id="1_kdgxh"]
+[ext_resource type="Texture2D" uid="uid://d3smkcuf46mx2" path="res://IconSprites/BasicDefend.png" id="2_kdgxh"]
+
+[resource]
+script = ExtResource("1_kdgxh")
+texture = ExtResource("2_kdgxh")
+color = 1
+block = 1

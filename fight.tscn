@@ -1,0 +1,126 @@
+[gd_scene format=3 uid="uid://cgqiegoofee3"]
+
+[ext_resource type="Script" uid="uid://bfrumse5kv75a" path="res://fight_controller.gd" id="1_562p4"]
+[ext_resource type="Script" uid="uid://6ej5jqlbrdup" path="res://match3_grid.gd" id="2_562p4"]
+[ext_resource type="Texture2D" uid="uid://dedr10fkmh3aj" path="res://sableye-2478737396.png" id="4_2ssja"]
+[ext_resource type="Texture2D" uid="uid://bg8xm1bfr2d5j" path="res://ProgressBar.png" id="5_y7cdv"]
+[ext_resource type="Texture2D" uid="uid://ckdfwv748or7j" path="res://ProgressBarFull.png" id="6_1u4tr"]
+[ext_resource type="Texture2D" uid="uid://rp0jsfobm0q" path="res://golduck-2854413550.png" id="7_i4q7v"]
+
+[sub_resource type="GDScript" id="GDScript_562p4"]
+script/source = "extends TextureProgressBar
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	SaveManager.connect(\"health_changed\", update_hud)
+
+func update_hud():
+	max_value = SaveManager.max_health
+	value = SaveManager.health
+
+func _exit_tree() -> void:
+	SaveManager.disconnect(\"health_changed\", update_hud)
+"
+
+[node name="FightController" type="Node2D" unique_id=1721884514]
+script = ExtResource("1_562p4")
+
+[node name="Wall" type="ColorRect" parent="." unique_id=1559503475]
+offset_left = -38.0
+offset_top = -20.0
+offset_right = 1312.0
+offset_bottom = 732.0
+color = Color(0.52, 0.52, 0.3952, 1)
+
+[node name="Office" type="Panel" parent="." unique_id=1972148186]
+offset_left = 400.0
+offset_top = 48.0
+offset_right = 896.0
+offset_bottom = 544.0
+script = ExtResource("2_562p4")
+board_size = Vector2i(5, 5)
+
+[node name="Office2" type="Panel" parent="." unique_id=605993350]
+visible = false
+offset_left = 136.0
+offset_top = 48.0
+offset_right = 384.0
+offset_bottom = 544.0
+script = ExtResource("2_562p4")
+board_size = Vector2i(3, 5)
+
+[node name="Office3" type="Panel" parent="." unique_id=1590861549]
+visible = false
+offset_left = 528.0
+offset_top = 48.0
+offset_right = 776.0
+offset_bottom = 544.0
+script = ExtResource("2_562p4")
+board_size = Vector2i(3, 5)
+
+[node name="Office4" type="Panel" parent="." unique_id=1038829599]
+visible = false
+offset_left = 912.0
+offset_top = 48.0
+offset_right = 1160.0
+offset_bottom = 544.0
+script = ExtResource("2_562p4")
+board_size = Vector2i(3, 5)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1307942873]
+offset_left = 536.0
+offset_top = 576.0
+offset_right = 576.0
+offset_bottom = 616.0
+
+[node name="Player" type="Sprite2D" parent="." unique_id=824379872]
+position = Vector2(240, 552)
+scale = Vector2(7, 7)
+texture = ExtResource("4_2ssja")
+
+[node name="PlayerHealth" type="TextureProgressBar" parent="." unique_id=1455172104]
+offset_left = 424.0
+offset_top = 592.0
+offset_right = 680.0
+offset_bottom = 634.0
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 12
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 4
+texture_under = ExtResource("5_y7cdv")
+texture_progress = ExtResource("6_1u4tr")
+script = SubResource("GDScript_562p4")
+
+[node name="Enemy" type="Sprite2D" parent="." unique_id=1820326490]
+position = Vector2(1064, 336)
+scale = Vector2(4, 4)
+texture = ExtResource("7_i4q7v")
+
+[node name="EnemyHealth" type="TextureProgressBar" parent="." unique_id=1016931409]
+offset_left = 960.0
+offset_top = 472.0
+offset_right = 1216.0
+offset_bottom = 514.0
+value = 92.0
+nine_patch_stretch = true
+stretch_margin_left = 12
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 4
+texture_under = ExtResource("5_y7cdv")
+texture_progress = ExtResource("6_1u4tr")
+
+[connection signal="combo_level_increased" from="Office" to="." method="_on_combo_level_increased"]
+[connection signal="combo_level_reset" from="Office" to="." method="_on_combo_level_reset"]
+[connection signal="move_used" from="Office" to="." method="_on_move_used"]
+[connection signal="combo_level_increased" from="Office2" to="." method="_on_combo_level_increased"]
+[connection signal="combo_level_reset" from="Office2" to="." method="_on_combo_level_reset"]
+[connection signal="move_used" from="Office2" to="." method="_on_move_used"]
+[connection signal="combo_level_increased" from="Office3" to="." method="_on_combo_level_increased"]
+[connection signal="combo_level_reset" from="Office3" to="." method="_on_combo_level_reset"]
+[connection signal="move_used" from="Office3" to="." method="_on_move_used"]
+[connection signal="combo_level_increased" from="Office4" to="." method="_on_combo_level_increased"]
+[connection signal="combo_level_reset" from="Office4" to="." method="_on_combo_level_reset"]
+[connection signal="move_used" from="Office4" to="." method="_on_move_used"]

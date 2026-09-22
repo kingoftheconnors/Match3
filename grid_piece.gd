@@ -1,36 +1,33 @@
 extends Sprite2D
 class_name grid_piece
 
-enum PIECE_TYPE {
-	WHITE, RED, BLUE, GREEN, YELLOW, ORANGE, PURPLE, POPPED,
-	AD,AD2,NEWSLETTER,PHISHING,VIRUS,DATA,CONTACT,SUPPORT_TICKET,APPLICANT,BUG,BACTERIA,EMAIL,HOUSE,HTML,ANALYTICS,BILL
-}
-var type : PIECE_TYPE
+var icon : Icon
 var grid : Node
-func initialize(piece_type : PIECE_TYPE, grid_obj, is_initial_setup : bool = false):
+var color : Icon.COLOR
+func initialize(icon_res : Icon, grid_obj, is_initial_setup : bool = false):
 	grid = grid_obj
-	type = piece_type
+	icon = icon_res
+	texture = icon.texture
+	set_color(icon_res.color)
 	if !is_initial_setup:
 		speed = BASE_SPEED*grid.get_speed_ratio()
-	match piece_type:
-		PIECE_TYPE.WHITE:
-			modulate = Color.WHITE
-		PIECE_TYPE.RED:
-			modulate = Color.RED
-		PIECE_TYPE.BLUE:
-			modulate = Color.BLUE
-		PIECE_TYPE.GREEN:
-			modulate = Color.GREEN
-		PIECE_TYPE.YELLOW:
-			modulate = Color.YELLOW
-		PIECE_TYPE.ORANGE:
-			modulate = Color.ORANGE
-		PIECE_TYPE.PURPLE:
-			modulate = Color.PURPLE
+func get_color() -> Icon.COLOR:
+	return color
+func set_color(color_val : Icon.COLOR):
+	color = color_val
+	match color:
+		Icon.COLOR.RED:
+			$Background.texture = preload("res://IconSprites/Red.png")
+		Icon.COLOR.BLUE:
+			$Background.texture = preload("res://IconSprites/Blue.png")
+		Icon.COLOR.GREEN:
+			$Background.texture = preload("res://IconSprites/Green.png")
+		Icon.COLOR.YELLOW:
+			$Background.texture = preload("res://IconSprites/Yellow.png")
+		Icon.COLOR.PURPLE:
+			$Background.texture = preload("res://IconSprites/Purple.png")
 		_:
-			modulate = Color.TRANSPARENT
-func get_type() -> PIECE_TYPE:
-	return type
+			$Background.modulate = Color.TRANSPARENT
 
 const SLOW_GEN_BASE_SPEED = 150
 const BASE_SPEED = 350
@@ -61,7 +58,7 @@ func is_falling() -> bool:
 func force_position_to(grid_position : Vector2i, piece_size : Vector2i):
 	position = get_position_by_grid(grid_position, piece_size)
 func get_position_by_grid(grid_position : Vector2i, piece_size : Vector2i) -> Vector2i:
-	return Vector2i(grid_position.x*piece_size.x+piece_size.x/2, grid_position.y*-piece_size.y-piece_size.y/2)
+	return Vector2i(grid_position.x*piece_size.x+piece_size.x/2, grid_position.y*-piece_size.y-piece_size.y/2 + grid.board_size.y*piece_size.y)
 
 var popped : bool = false
 func mark_popped():

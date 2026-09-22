@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Icon" format=3 uid="uid://1i8245adylq1"]
+
+[ext_resource type="Script" uid="uid://ber3dqjdcknif" path="res://icon.gd" id="1_l2cn0"]
+[ext_resource type="Texture2D" uid="uid://c2ss6i5s5ui1g" path="res://IconSprites/BasicAttack.png" id="2_ubsih"]
+
+[resource]
+script = ExtResource("1_l2cn0")
+texture = ExtResource("2_ubsih")
+damage = 1
