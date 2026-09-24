@@ -17,6 +17,9 @@ enum COLOR {
 @export var texture : Texture2D
 @export var color : COLOR
 @export var pop_type : POP_TYPE = POP_TYPE.GROUP
+@export var rarity : int
+@export var name : String
+@export var description : String
 
 @export var damage : int = 0
 @export var block : int = 0

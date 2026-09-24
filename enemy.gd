@@ -8,6 +8,7 @@ enum INTERMOVE_EFFECT {
 }
 
 @export var health: int
+@export var gold: int
 @export var enemy_bag: Array[Icon]
 @export var texture : Texture2D
 @export var intermove_effect: INTERMOVE_EFFECT

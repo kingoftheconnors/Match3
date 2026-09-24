@@ -19,7 +19,6 @@ func _on_pressed() -> void:
 		preload(\"res://Icons/basic_money.tres\"),
 		preload(\"res://Icons/basic_money.tres\"),
 		preload(\"res://Icons/basic_money.tres\"),
-		preload(\"res://Icons/basic_money.tres\"),
 		preload(\"res://Icons/basic_super.tres\"),
 	]
 	SaveManager.goto_level(0)

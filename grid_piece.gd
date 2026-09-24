@@ -15,19 +15,7 @@ func get_color() -> Icon.COLOR:
 	return color
 func set_color(color_val : Icon.COLOR):
 	color = color_val
-	match color:
-		Icon.COLOR.RED:
-			$Background.texture = preload("res://IconSprites/Red.png")
-		Icon.COLOR.BLUE:
-			$Background.texture = preload("res://IconSprites/Blue.png")
-		Icon.COLOR.GREEN:
-			$Background.texture = preload("res://IconSprites/Green.png")
-		Icon.COLOR.YELLOW:
-			$Background.texture = preload("res://IconSprites/Yellow.png")
-		Icon.COLOR.PURPLE:
-			$Background.texture = preload("res://IconSprites/Purple.png")
-		_:
-			$Background.modulate = Color.TRANSPARENT
+	$Background.texture = Helpers.get_color_texture(color)
 
 const SLOW_GEN_BASE_SPEED = 150
 const BASE_SPEED = 350

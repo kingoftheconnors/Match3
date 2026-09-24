@@ -7,4 +7,7 @@
 script = ExtResource("1_11tv2")
 texture = ExtResource("2_11tv2")
 color = 2
+rarity = 1
+name = "Super-strike"
+description = "Deals 3 damage"
 damage = 3

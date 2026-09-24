@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://bpvk2ano11ec5"]
+
+[ext_resource type="Script" uid="uid://dhy8bufkyr081" path="res://add_icon_panel.gd" id="1_sxwg5"]
+[ext_resource type="Texture2D" uid="uid://bvrqvrj3rh00g" path="res://IconSprites/Red.png" id="1_xl4oe"]
+[ext_resource type="Texture2D" uid="uid://c2ss6i5s5ui1g" path="res://IconSprites/BasicAttack.png" id="2_sxwg5"]
+
+[node name="Panel" type="Panel" unique_id=2060860905]
+custom_minimum_size = Vector2(240, 360)
+size_flags_vertical = 4
+script = ExtResource("1_sxwg5")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2085712973]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1717086981]
+layout_mode = 2
+theme_override_constants/separation = 36
+
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer" unique_id=114687950]
+layout_mode = 2
+text = "Icon Name"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer" unique_id=289051190]
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/Control" unique_id=450496871]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_xl4oe")
+expand_mode = 4
+stretch_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Control" unique_id=924083770]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_sxwg5")
+expand_mode = 4
+stretch_mode = 3
+
+[node name="Description" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1840509801]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "Icon Description it's a very cool icon that does extremely cool things to your enemies"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="GetIcon" type="Button" parent="MarginContainer/VBoxContainer" unique_id=858640066]
+layout_mode = 2
+size_flags_vertical = 10
+text = "Select this Icon"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/GetIcon" to="." method="_on_pressed"]

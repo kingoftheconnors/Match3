@@ -1,13 +1,13 @@
-[gd_resource type="Resource" script_class="Enemy" load_steps=4 format=3 uid="uid://c1rbwxdwe6epj"]
+[gd_resource type="Resource" script_class="Enemy" format=3 uid="uid://c1rbwxdwe6epj"]
 
 [ext_resource type="Resource" uid="uid://d5b1qrqwdift" path="res://Icons/enemy_attack.tres" id="1_qbmnd"]
-[ext_resource type="Script" path="res://enemy.gd" id="2_fe0ix"]
+[ext_resource type="Script" uid="uid://ber3dqjdcknif" path="res://icon.gd" id="1_wumgl"]
+[ext_resource type="Script" uid="uid://2sv2tv0dbhh8" path="res://enemy.gd" id="2_fe0ix"]
 [ext_resource type="Texture2D" uid="uid://rp0jsfobm0q" path="res://golduck-2854413550.png" id="3_gv360"]
 
 [resource]
 script = ExtResource("2_fe0ix")
-health = 0
-enemy_bag = Array[Resource("res://icon.gd")]([ExtResource("1_qbmnd"), ExtResource("1_qbmnd"), ExtResource("1_qbmnd"), ExtResource("1_qbmnd"), ExtResource("1_qbmnd"), ExtResource("1_qbmnd"), ExtResource("1_qbmnd"), ExtResource("1_qbmnd"), ExtResource("1_qbmnd"), ExtResource("1_qbmnd")])
+health = 70
+gold = 45
+enemy_bag = Array[ExtResource("1_wumgl")]([ExtResource("1_qbmnd"), ExtResource("1_qbmnd"), ExtResource("1_qbmnd"), ExtResource("1_qbmnd"), ExtResource("1_qbmnd"), ExtResource("1_qbmnd"), ExtResource("1_qbmnd"), ExtResource("1_qbmnd"), ExtResource("1_qbmnd"), ExtResource("1_qbmnd")])
 texture = ExtResource("3_gv360")
-intermove_effect = 0
-intermove_value = ""

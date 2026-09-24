@@ -7,4 +7,6 @@
 script = ExtResource("1_kdgxh")
 texture = ExtResource("2_kdgxh")
 color = 1
+name = "Defend"
+description = "Adds 1 block"
 block = 1

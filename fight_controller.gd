@@ -8,6 +8,16 @@ func initialize(fight : Fight):
 	bag = SaveManager.bag.duplicate()
 	for e in fight.enemies:
 		bag.append_array(e.enemy_bag)
+		$Enemy.setup(e.health, e.gold)
+
+func check_for_victory_or_defeat():
+	if $Enemy.health <= 0:
+		$Office.process_mode = Node.PROCESS_MODE_DISABLED
+		var gold_collection_percentage = 0.2
+		$VictoryWindow.show_victory_dialog(int($Enemy.gold * gold_collection_percentage))
+	if SaveManager.health <= 0:
+		$Office.process_mode = Node.PROCESS_MODE_DISABLED
+		$DefeatWindow.visible = true
 
 func remove_type(icon : Icon):
 	if bag.has(icon):
@@ -30,11 +40,21 @@ func _on_move_used():
 
 func block(amo):
 	block_val += amo
+	emit_signal("block_changed")
+func get_block() -> int:
+	return block_val
+func enemy_block(amo):
+	$Enemy.block(amo)
 func damage(amo):
-	pass
+	$Enemy.hurt(amo)
+	check_for_victory_or_defeat()
 func hurt(amo):
 	if block_val >= amo:
 		block_val -= amo
+		emit_signal("block_changed")
 	else:
 		block_val = 0
 		SaveManager.hurt(amo - block_val)
+	check_for_victory_or_defeat()
+
+signal block_changed

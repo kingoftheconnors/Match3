@@ -6,5 +6,5 @@ func _ready() -> void:
 		var fight_obj = preload("res://map_fight_btn.tscn").instantiate()
 		fight_obj.position = Vector2(500 - index*100, 480)
 		fight_obj.fight = f
-		get_parent().add_child(fight_obj)
+		add_child(fight_obj)
 		index += 1

@@ -8,4 +8,7 @@ script = ExtResource("1_w2vjg")
 texture = ExtResource("2_jrkj3")
 color = 4
 pop_type = 1
+rarity = 1000
+name = "Jab"
+description = "Deals 1 damage to the player"
 hurt = 1

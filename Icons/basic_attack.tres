@@ -6,4 +6,6 @@
 [resource]
 script = ExtResource("1_l2cn0")
 texture = ExtResource("2_ubsih")
+name = "Strike"
+description = "Deals 1 damage"
 damage = 1

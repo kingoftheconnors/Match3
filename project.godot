@@ -22,6 +22,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 SaveManager="*res://save_manager.gd"
+Helpers="*uid://c7pxnqvrulavr"
 
 [display]
 
