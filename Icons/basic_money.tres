@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_0rimu")
 texture = ExtResource("2_0rimu")
-color = 3
+color = 4
 pop_type = 1
 name = "Alchemy"
 description = "Earns one gold"

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Icon" format=3 uid="uid://fjde3kyrl0gq"]
+
+[ext_resource type="Script" uid="uid://ber3dqjdcknif" path="res://icon.gd" id="1_fglud"]
+[ext_resource type="Texture2D" uid="uid://tl08scdda86k" path="res://IconSprites/Wood.png" id="2_yjpjo"]
+
+[resource]
+script = ExtResource("1_fglud")
+texture = ExtResource("2_yjpjo")
+color = 6
+material = 4
+rarity = 1000
+name = "Wood"
+description = "Pops when an adjacent icon is popped"

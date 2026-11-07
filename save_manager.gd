@@ -38,8 +38,9 @@ func goto_level(entering_level = 0):#, depth = 5):
 			all_fights.append(load("res://Battles/" + f))
 		var boss_fights = all_fights.filter(func(f): return f.is_boss)
 		var regular_fights = all_fights.filter(func(f): return !f.is_boss and f.appears_on_levels.has(current_level))
+		for i in range(3):
+			fights.append(regular_fights[randi() % len(regular_fights)])
 		fights.append(boss_fights[randi() % len(boss_fights)])
-		fights.append(regular_fights[randi() % len(regular_fights)])
 
 func load_game():
 	if not FileAccess.file_exists("user://savegame.save"):
@@ -65,6 +66,8 @@ func load_game():
 	data_loaded = true
 
 func clear_data():
+	max_health = 100
+	health = max_health
 	fights = []
 	current_position = 0
 	bag = []

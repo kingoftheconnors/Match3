@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Fight" format=3 uid="uid://ckw02owd5ubbn"]
+
+[ext_resource type="Script" uid="uid://2sv2tv0dbhh8" path="res://EnemyScripts/enemy.gd" id="1_eyurp"]
+[ext_resource type="Resource" uid="uid://dl4aps1ejnucq" path="res://Enemies/superBasic.tres" id="2_eyurp"]
+[ext_resource type="Script" uid="uid://dsygbjqmmq5rr" path="res://fight.gd" id="3_1kudm"]
+
+[resource]
+resource_name = "BasicSuper"
+script = ExtResource("3_1kudm")
+appears_on_levels = Array[int]([0])
+enemies = Array[ExtResource("1_eyurp")]([ExtResource("2_eyurp")])

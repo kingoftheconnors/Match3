@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Icon" format=3 uid="uid://c02lvolq8725s"]
+
+[ext_resource type="Script" uid="uid://ber3dqjdcknif" path="res://icon.gd" id="1_jy016"]
+[ext_resource type="Texture2D" uid="uid://btd1qnekkalrw" path="res://IconSprites/BasicEnemySuper.png" id="2_jy016"]
+
+[resource]
+script = ExtResource("1_jy016")
+texture = ExtResource("2_jy016")
+color = 7
+pop_type = 1
+rarity = 1000
+name = "Stab"
+description = "Deals 3 damage to the player"
+hurt = 3

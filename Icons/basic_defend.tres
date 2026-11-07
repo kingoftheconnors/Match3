@@ -6,7 +6,8 @@
 [resource]
 script = ExtResource("1_kdgxh")
 texture = ExtResource("2_kdgxh")
-color = 1
+color = 2
+pop_type = 1
 name = "Defend"
 description = "Adds 1 block"
 block = 1

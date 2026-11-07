@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Fight" format=3 uid="uid://biq53w1i6g0wd"]
+
+[ext_resource type="Script" uid="uid://2sv2tv0dbhh8" path="res://EnemyScripts/enemy.gd" id="1_3tsq2"]
+[ext_resource type="Resource" uid="uid://bmbr7dwuuyn32" path="res://Enemies/iceTest.tres" id="2_xm7je"]
+[ext_resource type="Script" uid="uid://dsygbjqmmq5rr" path="res://fight.gd" id="3_7ubaq"]
+
+[resource]
+resource_name = "BasicIce"
+script = ExtResource("3_7ubaq")
+enemies = Array[ExtResource("1_3tsq2")]([ExtResource("2_xm7je")])

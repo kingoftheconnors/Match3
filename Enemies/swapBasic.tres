@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="Enemy" format=3 uid="uid://co42barpiv2t6"]
+
+[ext_resource type="Script" uid="uid://ber3dqjdcknif" path="res://icon.gd" id="1_jgkct"]
+[ext_resource type="Resource" uid="uid://d5b1qrqwdift" path="res://Icons/enemy_attack.tres" id="2_jgkct"]
+[ext_resource type="Script" uid="uid://djlww7dvyaqi0" path="res://EnemyScripts/enemy_effect.gd" id="3_dqhxk"]
+[ext_resource type="Script" uid="uid://bklqdau7glen0" path="res://EnemyScripts/mutate_effect.gd" id="4_6nf4a"]
+[ext_resource type="Script" uid="uid://2sv2tv0dbhh8" path="res://EnemyScripts/enemy.gd" id="5_7hdxy"]
+[ext_resource type="Texture2D" uid="uid://rp0jsfobm0q" path="res://golduck-2854413550.png" id="6_o2h0y"]
+
+[sub_resource type="Resource" id="Resource_5x4rv"]
+script = ExtResource("4_6nf4a")
+from_color = 5
+to_color = 4
+amount = 1000
+delay = 2
+metadata/_custom_type_script = "uid://bklqdau7glen0"
+
+[sub_resource type="Resource" id="Resource_u1h38"]
+script = ExtResource("4_6nf4a")
+from_color = 4
+to_color = 5
+amount = 1000
+delay = 2
+metadata/_custom_type_script = "uid://bklqdau7glen0"
+
+[resource]
+script = ExtResource("5_7hdxy")
+health = 50
+gold = 20
+enemy_bag = Array[ExtResource("1_jgkct")]([ExtResource("2_jgkct"), ExtResource("2_jgkct"), ExtResource("2_jgkct"), ExtResource("2_jgkct")])
+texture = ExtResource("6_o2h0y")
+intermove_effects = Array[ExtResource("3_dqhxk")]([SubResource("Resource_5x4rv"), SubResource("Resource_u1h38")])

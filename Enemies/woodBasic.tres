@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Enemy" format=3 uid="uid://ssv7hlqy274v"]
+
+[ext_resource type="Script" uid="uid://ber3dqjdcknif" path="res://icon.gd" id="1_crqnq"]
+[ext_resource type="Resource" uid="uid://fjde3kyrl0gq" path="res://Icons/basic_wood.tres" id="2_ep41m"]
+[ext_resource type="Script" uid="uid://2sv2tv0dbhh8" path="res://EnemyScripts/enemy.gd" id="3_ep41m"]
+[ext_resource type="Script" uid="uid://djlww7dvyaqi0" path="res://EnemyScripts/enemy_effect.gd" id="3_i26xk"]
+[ext_resource type="Texture2D" uid="uid://rp0jsfobm0q" path="res://golduck-2854413550.png" id="4_2rvok"]
+[ext_resource type="Script" uid="uid://dq3127nij4c27" path="res://EnemyScripts/attack_by_material_on_board.gd" id="4_7hdp7"]
+
+[sub_resource type="Resource" id="Resource_quex6"]
+script = ExtResource("4_7hdp7")
+material = 4
+delay = 3
+metadata/_custom_type_script = "uid://dq3127nij4c27"
+
+[resource]
+script = ExtResource("3_ep41m")
+health = 50
+gold = 20
+enemy_bag = Array[ExtResource("1_crqnq")]([ExtResource("2_ep41m"), ExtResource("2_ep41m"), ExtResource("2_ep41m"), ExtResource("2_ep41m"), ExtResource("2_ep41m"), ExtResource("2_ep41m")])
+texture = ExtResource("4_2rvok")
+intermove_effects = Array[ExtResource("3_i26xk")]([SubResource("Resource_quex6")])

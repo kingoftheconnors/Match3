@@ -1,7 +1,7 @@
 extends Panel
 
-signal icon_popped(type : Icon, group_size : int)
-signal move_used
+signal icon_popped(icon : Icon, icon_pos : Vector2i)
+signal move_completed
 signal set_enabled(flag : bool)
 signal combo_level_increased
 signal combo_level_reset
@@ -17,12 +17,40 @@ func add_piece_to_column(x, is_initial_setup : bool = false):
 	board[x].append(new_piece)
 	add_child(new_piece)
 
-@onready var fight_controller = get_parent()
+var fight_controller : level
 
 @export var board_size : Vector2i = Vector2i(6,6)
+func set_board_size(new_size : Vector2i):
+	if new_size.x < 1:
+		new_size.x = 1
+	if new_size.y < 1:
+		new_size.y = 1
+	if !is_node_ready():
+		board_size = new_size
+		return
+	if new_size.y < board_size.y:
+		for y in range(board_size.y-1, new_size.y-1, -1):
+			for x in range(board_size.x):
+				if piece_exists(Vector2i(x,y)):
+					board[x][y].queue_free()
+					board[x].pop_at(y)
+	if board_size.x > new_size.x:
+		for x in range(new_size.x, board_size.x):
+			for i in board[x]:
+				i.queue_free()
+			board.pop_at(x)
+	else:
+		for x in range(new_size.x-board_size.x):
+			board.append([])
+	board_size = new_size
+
+@export var enemy : NodePath
+func get_enemy() -> Node2D:
+	return get_node(enemy)
 
 # Board is an array of board-columns
 var board : Array[Array]
+var bag : Array[Icon]
 
 func _ready():
 	for i in board_size.x:
@@ -35,7 +63,7 @@ func _ready():
 		grid_has_matches = false
 		resort_tries -= 1
 		for x in range(board_size.x):
-			for y in range(board_size.y):
+			for y in range(board[x].size()):
 				var group = get_group(Vector2i(x,y), [])
 				if group.size() >= 3:
 					board[x][y].initialize(get_bag()[randi()%get_bag().size()], self, true)
@@ -43,7 +71,7 @@ func _ready():
 
 func reset():
 	for x in range(board_size.x):
-		for y in range(board_size.y):
+		for y in range(board[x].size()):
 			board[x][y].queue_free()
 	board = []
 	for i in board_size.x:
@@ -56,7 +84,7 @@ func reset():
 		grid_has_matches = false
 		resort_tries -= 1
 		for x in range(board_size.x):
-			for y in range(board_size.y):
+			for y in range(board[x].size()):
 				var group = get_group(Vector2i(x,y), [])
 				if group.size() >= 3:
 					board[x][y].initialize(get_bag()[randi()%get_bag().size()], self)
@@ -65,31 +93,15 @@ func reset():
 func _process(delta):
 	# Move all pieces down
 	for x in range(board_size.x):
-		for y in range(board_size.y):
+		for y in range(board[x].size()):
 			board[x][y].process_movement(delta, board[x][y-1] if y > 0 else null)
-	# Make sure we're not falling
+	# Make sure board isn't still settling
 	for column in board:
 		for piece in column:
-			if piece.is_falling() and board[selected_piece.x][selected_piece.y] != piece:
+			if piece.is_falling() and !piece.is_selected_piece:
 				return
 	# Pop all groups
-	var is_combo_still_going = false
-	for x in range(board_size.x):
-		for y in range(board_size.y):
-			if board[x][y].is_popped():
-				continue
-			var group = get_group(Vector2i(x,y), [])
-			if group.size() >= get_required_group_size_for_type(board[x][y].icon) and get_parent().is_game_active():
-				for pos in group:
-					pop_piece(pos, group.size())
-					if selected_piece == pos:
-						reset_selected_piece()
-				is_combo_still_going = true
-	# Update combo
-	if is_combo_still_going:
-		emit_signal("combo_level_increased")
-	else:
-		emit_signal("combo_level_reset")
+	pop_matches()
 	# Remove popped entries
 	for column in board:
 		for y in range(column.size()-1, -1, -1):
@@ -103,9 +115,28 @@ func _process(delta):
 		while board[x].size() < board_size.y:
 			add_piece_to_column(x)
 
+func pop_matches():
+	var is_combo_still_going = false
+	for x in range(board_size.x):
+		for y in range(board[x].size()):
+			if board[x][y].is_popped():
+				continue
+			var group = get_group(Vector2i(x,y), [])
+			if group.size() >= get_required_group_size_for_type(board[x][y].icon) and fight_controller.is_game_active():
+				for pos in group:
+					pop_piece(pos, group.size())
+					if board[pos.x][pos.y].is_selected_piece:
+						fight_controller.reset_selected_piece()
+				is_combo_still_going = true
+	# Update combo
+	if is_combo_still_going:
+		emit_signal("combo_level_increased")
+	else:
+		emit_signal("combo_level_reset")
+
 func has_poppable_groups() -> bool:
 	for x in range(board_size.x):
-		for y in range(board_size.y):
+		for y in range(board[x].size()):
 			var group = get_group(Vector2i(x,y), [])
 			if group.size() >= get_required_group_size_for_type(board[x][y].icon):
 				return true
@@ -113,15 +144,19 @@ func has_poppable_groups() -> bool:
 
 func find_piece_position(piece) -> Vector2i:
 	for x in range(board_size.x):
-		for y in range(board_size.y):
+		for y in range(board[x].size()):
 			if board[x][y] == piece:
 				return Vector2i(x, y)
 	return Vector2i(-1, -1)
 
 func get_required_group_size_for_type(_icon : Icon) -> int:
 	return 3
+func piece_exists(pos : Vector2i):
+	return board.size() > pos.x and board[pos.x].size() > pos.y
 
-func get_group(pos : Vector2i, current_group : Array[Vector2i], pop_type = null) -> Array[Vector2i]:
+func get_group(pos : Vector2i, current_group : Array, pop_type = null) -> Array[Vector2i]:
+	if board[pos.x][pos.y].get_color() == Icon.COLOR.COLORLESS:
+		return []
 	if pop_type == Icon.POP_TYPE.GROUP or board[pos.x][pos.y].icon.pop_type == Icon.POP_TYPE.GROUP:
 		current_group.append(pos)
 		var new_group : Array[Vector2i] = [pos]
@@ -130,7 +165,7 @@ func get_group(pos : Vector2i, current_group : Array[Vector2i], pop_type = null)
 				continue
 			if check_pos.y < 0 or check_pos.y >= board_size.y:
 				continue
-			if check_pos not in current_group and board[check_pos.x][check_pos.y].get_color() == board[pos.x][pos.y].get_color():
+			if check_pos not in current_group and piece_exists(check_pos) and board[check_pos.x][check_pos.y].get_color() == board[pos.x][pos.y].get_color():
 				for i in get_group(check_pos, current_group):
 					current_group.append(i)
 					new_group.append(i)
@@ -138,23 +173,23 @@ func get_group(pos : Vector2i, current_group : Array[Vector2i], pop_type = null)
 	elif pop_type == Icon.POP_TYPE.LINE or board[pos.x][pos.y].icon.pop_type == Icon.POP_TYPE.LINE:
 		current_group.append(pos)
 		var horizontal_group : Array[Vector2i] = []
-		if pos.x+1 < board_size.x and board[pos.x+1][pos.y].get_color() == board[pos.x][pos.y].get_color():
+		if pos.x+1 < board_size.x and piece_exists(pos+Vector2i.RIGHT) and board[pos.x+1][pos.y].get_color() == board[pos.x][pos.y].get_color():
 			horizontal_group.append(pos+Vector2i.RIGHT)
-			if pos.x+2 < board_size.x and board[pos.x+2][pos.y].get_color() == board[pos.x][pos.y].get_color():
+			if pos.x+2 < board_size.x and piece_exists(pos+Vector2i.RIGHT*2) and  board[pos.x+2][pos.y].get_color() == board[pos.x][pos.y].get_color():
 				horizontal_group.append(pos+Vector2i.RIGHT*2)
-		if pos.x-1 >= 0 and board[pos.x-1][pos.y].get_color() == board[pos.x][pos.y].get_color():
+		if pos.x-1 >= 0 and piece_exists(pos+Vector2i.LEFT) and board[pos.x-1][pos.y].get_color() == board[pos.x][pos.y].get_color():
 			horizontal_group.append(pos+Vector2i.LEFT)
-			if pos.x-2 >= 0 and board[pos.x-2][pos.y].get_color() == board[pos.x][pos.y].get_color():
+			if pos.x-2 >= 0 and piece_exists(pos+Vector2i.LEFT*2) and board[pos.x-2][pos.y].get_color() == board[pos.x][pos.y].get_color():
 				horizontal_group.append(pos+Vector2i.LEFT*2)
 		
 		var vertical_group : Array[Vector2i] = []
-		if pos.y+1 < board_size.y and board[pos.x][pos.y+1].get_color() == board[pos.x][pos.y].get_color():
+		if pos.y+1 < board[pos.x].size() and piece_exists(pos+Vector2i.DOWN) and board[pos.x][pos.y+1].get_color() == board[pos.x][pos.y].get_color():
 			vertical_group.append(pos+Vector2i.DOWN)
-			if pos.y+2 < board_size.y and board[pos.x][pos.y+2].get_color() == board[pos.x][pos.y].get_color():
+			if pos.y+2 < board_size.y and piece_exists(pos+Vector2i.DOWN*2) and board[pos.x][pos.y+2].get_color() == board[pos.x][pos.y].get_color():
 				vertical_group.append(pos+Vector2i.DOWN*2)
-		if pos.y-1 >= 0 and board[pos.x][pos.y-1].get_color() == board[pos.x][pos.y].get_color():
+		if pos.y-1 >= 0 and piece_exists(pos+Vector2i.UP*1) and board[pos.x][pos.y-1].get_color() == board[pos.x][pos.y].get_color():
 			vertical_group.append(pos+Vector2i.UP)
-			if pos.y-2 >= 0 and board[pos.x][pos.y-2].get_color() == board[pos.x][pos.y].get_color():
+			if pos.y-2 >= 0 and piece_exists(pos+Vector2i.UP*2) and board[pos.x][pos.y-2].get_color() == board[pos.x][pos.y].get_color():
 				vertical_group.append(pos+Vector2i.UP*2)
 		
 		var new_group : Array[Vector2i] = [pos]
@@ -171,42 +206,8 @@ func get_piece_size() -> Vector2i:
 func get_speed_ratio():
 	return 1.0
 
-var selected_piece : Vector2i = Vector2i(-1,-1)
-func _gui_input(event):
-	if event is InputEventMouseButton:
-		if event.pressed and visible and get_parent().is_game_active():
-			var grid_pos = get_grid_position(event.position)
-			if grid_pos.x < 0 or grid_pos.x >= board_size.x:
-				return
-			if grid_pos.y < 0 or grid_pos.y >= board_size.y:
-				return
-			if board[grid_pos.x][grid_pos.y].is_falling():
-				return
-			selected_piece = grid_pos
-		else:
-			if selected_piece.x >= 0 and selected_piece.y >= 0:
-				var grid_pos = get_grid_position(event.position)
-				if grid_pos.x >= 0 and grid_pos.x < board_size.x \
-						and grid_pos.y >= 0 and grid_pos.y < board_size.y:
-					if grid_pos != selected_piece and board[grid_pos.x][grid_pos.y].icon != board[selected_piece.x][selected_piece.y].icon:
-						var swap_piece = board[grid_pos.x][grid_pos.y]
-						board[grid_pos.x][grid_pos.y] = board[selected_piece.x][selected_piece.y]
-						board[selected_piece.x][selected_piece.y] = swap_piece
-						# Swap back if failed to make a match
-						if (get_group(grid_pos, []).size() < get_required_group_size_for_type(board[grid_pos.x][grid_pos.y].icon) \
-							and get_group(selected_piece, []).size() < get_required_group_size_for_type(board[selected_piece.x][selected_piece.y].icon)):
-							swap_piece = board[grid_pos.x][grid_pos.y]
-							board[grid_pos.x][grid_pos.y] = board[selected_piece.x][selected_piece.y]
-							board[selected_piece.x][selected_piece.y] = swap_piece
-						else:
-							emit_signal("move_used")
-						board[grid_pos.x][grid_pos.y].force_position_to(grid_pos, get_piece_size())
-						board[selected_piece.x][selected_piece.y].force_position_to(selected_piece, get_piece_size())
-				else:
-					reset_selected_piece()
-			var selected_pos = selected_piece
-			selected_piece = Vector2i(-1,-1)
-			board[selected_pos.x][selected_pos.y].process_movement(0.01, board[selected_pos.x][selected_pos.y-1] if selected_piece.y > 0 else null)
+func replace_piece(pos, piece):
+	board[pos.x][pos.y] = piece
 
 func set_grid_enabled(flag : bool):
 	if flag:
@@ -218,43 +219,83 @@ func set_grid_enabled(flag : bool):
 func is_settling():
 	for column in board:
 		for piece in column:
-			if piece.is_falling() and board[selected_piece.x][selected_piece.y] != piece:
+			if (piece.is_falling() or piece.is_popped()) and !piece.is_selected_piece:
 				return true
 	return false
 
-func pop_piece(pos : Vector2, group_size):
+func pop_piece(pos : Vector2, _group_size = 1):
 	if board[pos.x][pos.y].is_popped() == false:
 		board[pos.x][pos.y].icon.pop(fight_controller, self)
 		board[pos.x][pos.y].mark_popped()
-		emit_signal("icon_popped", board[pos.x][pos.y].icon, group_size)
+		emit_signal("icon_popped", board[pos.x][pos.y].icon, pos, self)
 
-func pop_all_of_type(icon : Icon):
-	for x in range(board_size.x):
-		for y in range(board_size.y):
-			if board[x][y].icon == icon:
-				pop_piece(Vector2(x, y), 1)
+func destroy(pos : Vector2i):
+	if board[pos.x][pos.y].is_popped() == false:
+		board[pos.x][pos.y].mark_popped()
 
+func get_board_size() -> Vector2i:
+	return board_size
 func get_grid_position(pos) -> Vector2i:
 	if pos.y < 0 or pos.x < 0:
 		return Vector2i(-1,-1)
 	return Vector2i((pos.x)/get_piece_size().x, (pos.y-board_size.y*get_piece_size().y)/-get_piece_size().y)
-func is_selected_piece(piece) -> bool:
-	if selected_piece.x >= 0 and selected_piece.y >= 0:
-		if board[selected_piece.x][selected_piece.y] == piece:
-			return true
-	return false
+func get_piece_at_global_pos(pos) -> grid_piece:
+	var grid_pos = get_grid_position(pos-global_position)
+	if grid_pos.x < 0 or grid_pos.x >= board_size.x:
+		return null
+	if grid_pos.y < 0 or grid_pos.y >= board_size.y:
+		return null
+	if board[grid_pos.x][grid_pos.y].is_falling():
+		return null
+	return board[grid_pos.x][grid_pos.y]
 
 var queued_pieces : Array[Icon]
 func load_piece(icon : Icon):
 	queued_pieces.append(icon)
 
 func get_bag():
-	return get_parent().bag
+	return bag
 
-func _on_level_flow_reset():
-	reset_selected_piece()
+func get_amount_of_material(mat : Icon.MATERIAL) -> int:
+	var damage = 0
+	for column in board:
+		for piece in column:
+			if piece.is_on_board() and piece.is_popped() == false \
+				and piece.icon.material == mat:
+				damage += 1
+	return damage
 
-func reset_selected_piece():
-	if selected_piece.x >= 0 and selected_piece.y >= 0:
-		board[selected_piece.x][selected_piece.y].force_position_to(selected_piece, get_piece_size())
-		selected_piece = Vector2i(-1,-1)
+func transmute_random(amount : int, from_color : Icon.COLOR, from_material : Icon.MATERIAL, to_color : Icon.COLOR, to_material : Icon.MATERIAL):
+	var icons_to_transmute : Array
+	for column in board:
+		for piece in column:
+			if piece.is_on_board() and piece.is_popped() == false \
+				and (from_color == Icon.COLOR.NONE or piece.icon.color == from_color) \
+				and (from_material == Icon.MATERIAL.NONE or piece.icon.material == from_material):
+				icons_to_transmute.append(piece)
+	if amount < icons_to_transmute.size():
+		for i in amount:
+			icons_to_transmute[randi()%icons_to_transmute.size()].transmute(to_color, to_material)
+	else:
+		for i in icons_to_transmute:
+			i.transmute(to_color, to_material)
+
+func on_move_used() -> void:
+	for x in range(board_size.x):
+		for y in range(board[x].size()):
+			if board[x][y].is_popped():
+				continue
+			board[x][y].move_used(fight_controller, self, Vector2i(x,y))
+func on_move_completed() -> void:
+	for x in range(board_size.x):
+		for y in range(board[x].size()):
+			if board[x][y].is_popped():
+				continue
+			board[x][y].move_completed(fight_controller, self, Vector2i(x,y))
+
+func on_icon_popped(_icon: Icon, icon_pos: Vector2i, icon_board) -> void:
+	for x in range(board_size.x):
+		for y in range(board[x].size()):
+			if board[x][y].is_popped():
+				continue
+			board[x][y].icon_popped(fight_controller, icon_board, icon_pos, Vector2i(x,y))

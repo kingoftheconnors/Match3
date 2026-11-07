@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Icon" format=3 uid="uid://dbpm2em5qedrm"]
+
+[ext_resource type="Script" uid="uid://ber3dqjdcknif" path="res://icon.gd" id="1_krrl1"]
+[ext_resource type="Texture2D" uid="uid://ofgthbkhjgun" path="res://IconSprites/Ice.png" id="2_j1qak"]
+
+[resource]
+script = ExtResource("1_krrl1")
+texture = ExtResource("2_j1qak")
+color = 6
+material = 3
+rarity = 1000
+name = "Ice"
+description = "Melts after 3 turns"

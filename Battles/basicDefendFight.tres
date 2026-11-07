@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Fight" format=3 uid="uid://b4q33edpve403"]
+
+[ext_resource type="Script" uid="uid://2sv2tv0dbhh8" path="res://EnemyScripts/enemy.gd" id="1_3ia4d"]
+[ext_resource type="Resource" uid="uid://dvbsvclq1dk63" path="res://Enemies/scaredBasic.tres" id="2_3ia4d"]
+[ext_resource type="Script" uid="uid://dsygbjqmmq5rr" path="res://fight.gd" id="3_2ql5l"]
+
+[resource]
+resource_name = "BasicScared"
+script = ExtResource("3_2ql5l")
+enemies = Array[ExtResource("1_3ia4d")]([ExtResource("2_3ia4d")])

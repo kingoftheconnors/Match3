@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Fight" format=3 uid="uid://bj66e8lxy870s"]
+
+[ext_resource type="Script" uid="uid://2sv2tv0dbhh8" path="res://EnemyScripts/enemy.gd" id="1_qv2mk"]
+[ext_resource type="Resource" uid="uid://co42barpiv2t6" path="res://Enemies/swapBasic.tres" id="2_qv2mk"]
+[ext_resource type="Script" uid="uid://dsygbjqmmq5rr" path="res://fight.gd" id="3_t5do1"]
+
+[resource]
+resource_name = "BasicSwap"
+script = ExtResource("3_t5do1")
+enemies = Array[ExtResource("1_qv2mk")]([ExtResource("2_qv2mk")])

@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://dp4ssup0b73ej"]
+
+[ext_resource type="Script" uid="uid://6ej5jqlbrdup" path="res://match3_grid.gd" id="1_cuex1"]
+[ext_resource type="Script" uid="uid://bqyy15gyouick" path="res://enemy_board.gd" id="1_mivg4"]
+[ext_resource type="Script" uid="uid://p8mgwubrojnr" path="res://fight_enemy.gd" id="2_mivg4"]
+[ext_resource type="Texture2D" uid="uid://rp0jsfobm0q" path="res://golduck-2854413550.png" id="3_gkx3i"]
+[ext_resource type="Theme" uid="uid://c7tebtk0wlklo" path="res://Theme.tres" id="4_cxjok"]
+[ext_resource type="Texture2D" uid="uid://bg8xm1bfr2d5j" path="res://ProgressBar.png" id="5_y2t72"]
+[ext_resource type="Texture2D" uid="uid://ckdfwv748or7j" path="res://ProgressBarFull.png" id="6_5bb1p"]
+[ext_resource type="Texture2D" uid="uid://bkwx78og7a44o" path="res://Shield.png" id="7_nv052"]
+[ext_resource type="Texture2D" uid="uid://c278rsqvfym2l" path="res://gold.png" id="8_85031"]
+
+[node name="EnemyBoard" type="Node2D" unique_id=1096568536]
+script = ExtResource("1_mivg4")
+
+[node name="Office" type="Panel" parent="." unique_id=313586196]
+offset_left = -498.0
+offset_top = -296.0
+offset_bottom = 119.0
+pivot_offset_ratio = Vector2(1, 1)
+mouse_filter = 1
+script = ExtResource("1_cuex1")
+board_size = Vector2i(6, 5)
+enemy = NodePath("../Enemy")
+
+[node name="Enemy" type="Node2D" parent="." unique_id=195905666]
+position = Vector2(200, 56)
+script = ExtResource("2_mivg4")
+board = NodePath("../Office")
+
+[node name="Enemy" type="Sprite2D" parent="Enemy" unique_id=582151711]
+position = Vector2(-24, -184)
+scale = Vector2(4, 4)
+texture = ExtResource("3_gkx3i")
+
+[node name="EnemyHealth" type="TextureProgressBar" parent="Enemy" unique_id=1922030638]
+offset_left = -96.0
+offset_top = -48.0
+offset_right = 96.0
+offset_bottom = -6.0
+theme = ExtResource("4_cxjok")
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 12
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 4
+texture_under = ExtResource("5_y2t72")
+texture_progress = ExtResource("6_5bb1p")
+
+[node name="Shield" type="TextureRect" parent="Enemy/EnemyHealth" unique_id=40939983]
+visible = false
+layout_mode = 0
+offset_left = -32.0
+offset_top = -12.0
+offset_right = 32.0
+offset_bottom = 52.0
+texture = ExtResource("7_nv052")
+
+[node name="Label" type="Label" parent="Enemy/EnemyHealth/Shield" unique_id=506672749]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 60.0
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="Enemy/EnemyHealth" unique_id=283533509]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "100/100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="Enemy" unique_id=1637349724]
+offset_left = -96.0
+offset_right = -54.0
+offset_bottom = 38.0
+texture = ExtResource("8_85031")
+
+[node name="Gold" type="Label" parent="Enemy" unique_id=461572855]
+offset_left = -48.0
+offset_top = 8.0
+offset_right = -38.0
+offset_bottom = 31.0
+text = "0"
+
+[node name="IntentGlyphs" type="HBoxContainer" parent="Enemy" unique_id=406716524]
+offset_left = -104.0
+offset_top = -368.0
+offset_right = 72.0
+offset_bottom = -312.0
+alignment = 1

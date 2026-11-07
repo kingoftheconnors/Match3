@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Enemy" format=3 uid="uid://dl4aps1ejnucq"]
+
+[ext_resource type="Script" uid="uid://ber3dqjdcknif" path="res://icon.gd" id="1_oo3qh"]
+[ext_resource type="Resource" uid="uid://c02lvolq8725s" path="res://Icons/enemy_super.tres" id="2_ukanl"]
+[ext_resource type="Script" uid="uid://djlww7dvyaqi0" path="res://EnemyScripts/enemy_effect.gd" id="3_yssdj"]
+[ext_resource type="Script" uid="uid://kn1hnyryhonx" path="res://EnemyScripts/destroy_section_effect.gd" id="4_oo3qh"]
+[ext_resource type="Script" uid="uid://2sv2tv0dbhh8" path="res://EnemyScripts/enemy.gd" id="5_icj5k"]
+[ext_resource type="Texture2D" uid="uid://rp0jsfobm0q" path="res://golduck-2854413550.png" id="6_ppxb7"]
+
+[sub_resource type="Resource" id="Resource_rgwgi"]
+script = ExtResource("4_oo3qh")
+metadata/_custom_type_script = "uid://kn1hnyryhonx"
+
+[resource]
+script = ExtResource("5_icj5k")
+health = 50
+gold = 20
+enemy_bag = Array[ExtResource("1_oo3qh")]([ExtResource("2_ukanl"), ExtResource("2_ukanl")])
+texture = ExtResource("6_ppxb7")
+intermove_effects = Array[ExtResource("3_yssdj")]([SubResource("Resource_rgwgi")])
