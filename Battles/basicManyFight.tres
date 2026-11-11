@@ -1,7 +1,6 @@
 [gd_resource type="Resource" script_class="Fight" format=3 uid="uid://iey2e2s4l3cr"]
 
 [ext_resource type="Script" uid="uid://2sv2tv0dbhh8" path="res://EnemyScripts/enemy.gd" id="1_rwyiv"]
-[ext_resource type="Resource" uid="uid://bmbr7dwuuyn32" path="res://Enemies/iceTest.tres" id="2_8mmge"]
 [ext_resource type="Resource" uid="uid://ssv7hlqy274v" path="res://Enemies/woodBasic.tres" id="3_8mmge"]
 [ext_resource type="Script" uid="uid://dsygbjqmmq5rr" path="res://fight.gd" id="3_cym84"]
 [ext_resource type="Resource" uid="uid://dvbsvclq1dk63" path="res://Enemies/scaredBasic.tres" id="4_cym84"]
@@ -10,4 +9,4 @@
 resource_name = "BasicManyFight"
 script = ExtResource("3_cym84")
 appears_on_levels = Array[int]([0])
-enemies = Array[ExtResource("1_rwyiv")]([ExtResource("2_8mmge"), ExtResource("3_8mmge"), ExtResource("4_cym84")])
+enemies = Array[ExtResource("1_rwyiv")]([ExtResource("3_8mmge"), ExtResource("4_cym84")])

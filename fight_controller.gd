@@ -12,7 +12,7 @@ func initialize(fight : Fight):
 		board.position = Vector2(900, 360)
 		var new_bag = bag.duplicate()
 		new_bag.append_array(e.enemy_bag)
-		board.set_size(enemies.size())
+		board.set_size(fight.enemies.size()-1)
 		board.set_board_size(Vector2i(6-fight.enemies.size(), 5))
 		board.initialize(self, e, new_bag)
 		add_child(board)
@@ -27,13 +27,15 @@ func check_for_victory_or_defeat():
 			enemies.erase(e)
 			for ee in enemies:
 				ee.set_board_size(Vector2i(6-enemies.size(), 5))
-	if enemies.is_empty():
+	if is_all_enemies_defeated():
 		var gold_collection_percentage = 0.2
 		$VictoryWindow.show_victory_dialog(int(total_gold_won * gold_collection_percentage))
 	if SaveManager.health <= 0:
 		for e in enemies:
 			e.process_mode = Node.PROCESS_MODE_DISABLED
 		$DefeatWindow.visible = true
+func is_all_enemies_defeated() -> bool:
+	return enemies.is_empty()
 
 var is_move_processing : bool = false
 func _process(_delta: float) -> void:
@@ -94,7 +96,7 @@ func get_selected_piece():
 	return selection
 
 var selected_piece : grid_piece
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed and visible and is_game_active():
 			if selected_piece:
@@ -108,6 +110,7 @@ func _input(event: InputEvent) -> void:
 				selected_piece = e.get_piece_at_global_pos(event.position)
 				if selected_piece:
 					selected_piece.set_is_selected_piece(true)
+					get_viewport().set_input_as_handled()
 					return
 		else:
 			if selected_piece:

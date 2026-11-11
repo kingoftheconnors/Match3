@@ -7,4 +7,5 @@
 [resource]
 resource_name = "BasicWood"
 script = ExtResource("1_cnst4")
+appears_on_levels = Array[int]([0])
 enemies = Array[ExtResource("1_ctuk3")]([ExtResource("2_ctuk3")])

@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://on7jxr2rh88l"]
+
+[ext_resource type="Script" uid="uid://bxsxngrsdlx36" path="res://bag.gd" id="1_u3xkn"]
+[ext_resource type="Script" uid="uid://2gam5ag7ggd6" path="res://bag_unused_materials.gd" id="2_76wf2"]
+
+[sub_resource type="GDScript" id="GDScript_urblq"]
+script/source = "extends Panel
+
+func toggle_visible():
+	visible = !visible
+	if visible:
+		$BagPieces.open()
+		$MaterialsContainer/Materials.open()
+"
+
+[node name="Bag" type="Panel" unique_id=1489635901]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_urblq")
+
+[node name="BagPieces" type="Panel" parent="." unique_id=917273326]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.30600002
+anchor_top = 0.056
+anchor_right = 0.96900004
+anchor_bottom = 0.94400007
+offset_left = -7.680023
+offset_top = -0.3199997
+offset_right = -0.32006836
+offset_bottom = 0.3199463
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u3xkn")
+
+[node name="MaterialsContainer" type="Panel" parent="." unique_id=464919182]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.037
+anchor_top = 0.056
+anchor_right = 0.28100002
+anchor_bottom = 0.94400007
+offset_left = 0.6399994
+offset_top = -0.3199997
+offset_right = 0.3199768
+offset_bottom = -7.6800537
+
+[node name="Materials" type="VBoxContainer" parent="MaterialsContainer" unique_id=46398870]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_76wf2")
+bag_pieces = NodePath("../../BagPieces")

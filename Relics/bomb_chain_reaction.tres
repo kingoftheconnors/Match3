@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://dc1qcy4i8m5gj"]
+
+[ext_resource type="Script" uid="uid://dprxm2o07dkwq" path="res://relic.gd" id="1_xndfb"]
+
+[resource]
+script = ExtResource("1_xndfb")
+name = "Chain Reaction"
+classification = "BOMB_CHAIN_REACTION"
+description = "Bombs Activate Popped Icons' Effects rather than Destroying them"
+rarity = 1
+cost = 30
+metadata/_custom_type_script = "uid://dprxm2o07dkwq"

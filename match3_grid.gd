@@ -95,13 +95,6 @@ func _process(delta):
 	for x in range(board_size.x):
 		for y in range(board[x].size()):
 			board[x][y].process_movement(delta, board[x][y-1] if y > 0 else null)
-	# Make sure board isn't still settling
-	for column in board:
-		for piece in column:
-			if piece.is_falling() and !piece.is_selected_piece:
-				return
-	# Pop all groups
-	pop_matches()
 	# Remove popped entries
 	for column in board:
 		for y in range(column.size()-1, -1, -1):
@@ -110,6 +103,13 @@ func _process(delta):
 				column.erase(piece_to_delete)
 				piece_to_delete.queue_free()
 				y -= 1
+	# Make sure board isn't still settling
+	for column in board:
+		for piece in column:
+			if piece.is_falling() and !piece.is_selected_piece:
+				return
+	# Pop all groups
+	pop_matches()
 	# Add new entries
 	for x in range(board_size.x):
 		while board[x].size() < board_size.y:
@@ -152,12 +152,12 @@ func find_piece_position(piece) -> Vector2i:
 func get_required_group_size_for_type(_icon : Icon) -> int:
 	return 3
 func piece_exists(pos : Vector2i):
-	return board.size() > pos.x and board[pos.x].size() > pos.y
+	return board.size() > pos.x and board[pos.x].size() > pos.y and pos.x >= 0 and pos.y >= 0
 
-func get_group(pos : Vector2i, current_group : Array, pop_type = null) -> Array[Vector2i]:
-	if board[pos.x][pos.y].get_color() == Icon.COLOR.COLORLESS:
+func get_group(pos : Vector2i, current_group : Array, pop_material = null) -> Array[Vector2i]:
+	if Icon.is_matchable_color(board[pos.x][pos.y].get_color()) == false:
 		return []
-	if pop_type == Icon.POP_TYPE.GROUP or board[pos.x][pos.y].icon.pop_type == Icon.POP_TYPE.GROUP:
+	if pop_material == Icon.MATERIAL.METAL or board[pos.x][pos.y].icon.material == Icon.MATERIAL.METAL:
 		current_group.append(pos)
 		var new_group : Array[Vector2i] = [pos]
 		for check_pos in [pos+Vector2i.RIGHT,pos+Vector2i.LEFT,pos+Vector2i.UP,pos+Vector2i.DOWN]:
@@ -170,7 +170,7 @@ func get_group(pos : Vector2i, current_group : Array, pop_type = null) -> Array[
 					current_group.append(i)
 					new_group.append(i)
 		return new_group
-	elif pop_type == Icon.POP_TYPE.LINE or board[pos.x][pos.y].icon.pop_type == Icon.POP_TYPE.LINE:
+	elif pop_material == Icon.MATERIAL.GEM or board[pos.x][pos.y].icon.material == Icon.MATERIAL.GEM:
 		current_group.append(pos)
 		var horizontal_group : Array[Vector2i] = []
 		if pos.x+1 < board_size.x and piece_exists(pos+Vector2i.RIGHT) and board[pos.x+1][pos.y].get_color() == board[pos.x][pos.y].get_color():
@@ -225,12 +225,12 @@ func is_settling():
 
 func pop_piece(pos : Vector2, _group_size = 1):
 	if board[pos.x][pos.y].is_popped() == false:
-		board[pos.x][pos.y].icon.pop(fight_controller, self)
 		board[pos.x][pos.y].mark_popped()
+		board[pos.x][pos.y].icon.pop(fight_controller, self, pos)
 		emit_signal("icon_popped", board[pos.x][pos.y].icon, pos, self)
 
 func destroy(pos : Vector2i):
-	if board[pos.x][pos.y].is_popped() == false:
+	if piece_exists(pos) and board[pos.x][pos.y].is_popped() == false:
 		board[pos.x][pos.y].mark_popped()
 
 func get_board_size() -> Vector2i:
@@ -265,7 +265,16 @@ func get_amount_of_material(mat : Icon.MATERIAL) -> int:
 				damage += 1
 	return damage
 
-func transmute_random(amount : int, from_color : Icon.COLOR, from_material : Icon.MATERIAL, to_color : Icon.COLOR, to_material : Icon.MATERIAL):
+func get_amount_of_color(color : Icon.COLOR) -> int:
+	var damage = 0
+	for column in board:
+		for piece in column:
+			if piece.is_on_board() and piece.is_popped() == false \
+				and piece.icon.color == color:
+				damage += 1
+	return damage
+
+func transmute_random(amount : int, from_color : Icon.COLOR, from_material : Icon.MATERIAL, to_color : Icon.COLOR, to_material : Icon.MATERIAL) -> int:
 	var icons_to_transmute : Array
 	for column in board:
 		for piece in column:
@@ -276,9 +285,14 @@ func transmute_random(amount : int, from_color : Icon.COLOR, from_material : Ico
 	if amount < icons_to_transmute.size():
 		for i in amount:
 			icons_to_transmute[randi()%icons_to_transmute.size()].transmute(to_color, to_material)
+		return amount
 	else:
 		for i in icons_to_transmute:
 			i.transmute(to_color, to_material)
+		return icons_to_transmute.size()
+func transmute_position(pos : Vector2i, to_color : Icon.COLOR, to_material : Icon.MATERIAL):
+	if piece_exists(pos):
+		board[pos.x][pos.y].transmute(to_color, to_material)
 
 func on_move_used() -> void:
 	for x in range(board_size.x):

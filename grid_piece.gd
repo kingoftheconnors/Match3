@@ -3,12 +3,17 @@ class_name grid_piece
 
 var icon : Icon
 var grid : Node
-func initialize(icon_res : Icon, grid_obj, is_initial_setup : bool = false):
+func initialize(icon_res : Icon, grid_obj, is_initial_setup : bool = false, is_update_menu = false):
 	grid = grid_obj
-	icon = icon_res.duplicate()
-	if icon.texture:
-		texture = icon.texture
+	if is_update_menu:
+		icon = icon_res
+	else:
+		icon = icon_res.duplicate()
 	set_icon_color(icon_res.color)
+	if SaveManager.has_relic_classification("ICE_TO_WOOD") and icon_res.color == Icon.COLOR.ICE:
+		set_icon_color(Icon.COLOR.WOOD)
+	set_icon_material(icon_res.material)
+	set_icon_effect(icon_res.effect)
 	if !is_initial_setup:
 		speed = BASE_SPEED*grid.get_speed_ratio()
 	icon._init()
@@ -19,8 +24,13 @@ func get_material_type() -> Icon.MATERIAL:
 func set_icon_color(color_val : Icon.COLOR):
 	icon.color = color_val
 	$Background.texture = Icon.get_color_texture(color_val)
+	$Foreground.texture = Icon.get_color_foreground_texture(color_val)
 func set_icon_material(material_val : Icon.MATERIAL):
 	icon.material = material_val
+	texture = Icon.get_material_texture(icon.material)
+func set_icon_effect(effect_val : Icon.EFFECT):
+	icon.effect = effect_val
+	$Effect.texture = Icon.get_effect_texture(icon.effect)
 func transmute(to_color : Icon.COLOR, to_material : Icon.MATERIAL):
 	if to_color != Icon.COLOR.NONE:
 		set_icon_color(to_color)

@@ -9,6 +9,7 @@ var fight_controller : level
 func setup(e : Enemy) -> void:
 	enemy = e.duplicate()
 	$EnemyHealth.max_value = e.health
+	$Enemy.texture = e.texture
 	enemy._init()
 	update_hud()
 

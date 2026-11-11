@@ -7,4 +7,5 @@
 [resource]
 resource_name = "BasicScared"
 script = ExtResource("3_2ql5l")
+appears_on_levels = Array[int]([0])
 enemies = Array[ExtResource("1_3ia4d")]([ExtResource("2_3ia4d")])

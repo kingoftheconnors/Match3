@@ -7,7 +7,13 @@ var max_health : int = 100
 var health : int = 100
 var bag : Array[Icon] = []
 var gold : int = 0
-var relics : Array = []
+var unused_upgrade_materials : Array[Icon.MATERIAL] = []
+var unused_upgrade_colors : Array[Icon.COLOR] = [Icon.COLOR.RED, Icon.COLOR.BLUE]
+var unused_upgrade_effects : Array[Icon.EFFECT] = [Icon.EFFECT.SPRAYPAINT]
+var relics : Array[Relic] = []
+
+func has_relic_classification(classification : String) -> bool:
+	return relics.any(func(relic): return relic.classification == classification)
 
 ## Saves game data, including progress and collectibles
 func save_game():
@@ -38,7 +44,7 @@ func goto_level(entering_level = 0):#, depth = 5):
 			all_fights.append(load("res://Battles/" + f))
 		var boss_fights = all_fights.filter(func(f): return f.is_boss)
 		var regular_fights = all_fights.filter(func(f): return !f.is_boss and f.appears_on_levels.has(current_level))
-		for i in range(3):
+		for i in range(5):
 			fights.append(regular_fights[randi() % len(regular_fights)])
 		fights.append(boss_fights[randi() % len(boss_fights)])
 

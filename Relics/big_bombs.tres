@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://ddhrlk4oyqyjy"]
+
+[ext_resource type="Script" uid="uid://dprxm2o07dkwq" path="res://relic.gd" id="1_jsavp"]
+
+[resource]
+script = ExtResource("1_jsavp")
+name = "Extra Gunpowder"
+classification = "BIG_EXPLOSIONS"
+rarity = 1
+cost = 30
+metadata/_custom_type_script = "uid://dprxm2o07dkwq"

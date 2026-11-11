@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://br7p5rju7y7py"]
+
+[ext_resource type="Texture2D" uid="uid://bvrqvrj3rh00g" path="res://IconSprites/Red.png" id="1_287o7"]
+[ext_resource type="Script" uid="uid://d2fdh76rwf3xj" path="res://bag_effect_piece.gd" id="2_287o7"]
+
+[node name="EffectToAdd" type="TextureRect" unique_id=1131004675]
+offset_transform_enabled = true
+texture = ExtResource("1_287o7")
+stretch_mode = 2
+script = ExtResource("2_287o7")

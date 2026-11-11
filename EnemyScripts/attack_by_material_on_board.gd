@@ -1,10 +1,10 @@
 class_name AttackByMaterialEffect
 extends EnemyEffect
 
-@export var material : Icon.MATERIAL
+@export var color : Icon.COLOR
 
 func get_damage(board) -> int:
-	return board.get_amount_of_material(material)
+	return board.get_amount_of_color(color)
 
 func do_effect(fight_controller, board) -> bool:
 	var completed_effect = super(fight_controller, board)
@@ -23,6 +23,6 @@ func get_current_effect_glyphs(_fight_controller, board) -> Array[TextureRect]:
 	amount_label.text = str(get_damage(board))
 	amount_label.position = Vector2(32, 32)
 	intent.add_child(amount_label)
-	intent.tooltip_text = "Deals " + str(get_damage(board)) + " damage based on amount of " + str(material) + " on board"
+	intent.tooltip_text = "Deals " + str(get_damage(board)) + " damage based on amount of " + Icon.COLOR_NAME(color) + " on board"
 	ret.append(intent)
 	return ret

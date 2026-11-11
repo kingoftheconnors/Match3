@@ -71,29 +71,78 @@ script/source = "extends CanvasLayer
 
 func show_icons():
 	visible = true
-	var already_selected_icons : Array[Icon] = []
+	var already_selected_relics : Array[Relic] = []
+	var already_selected_colors : Array[Icon.COLOR] = []
+	var already_selected_effects : Array[Icon.EFFECT] = []
 	for i in range(3):
-		var panel = preload(\"res://add_icon_panel.tscn\").instantiate()
-		
 		var current_rarity : int = 1
-		
-		# Get random icon
-		var icon_paths = ResourceLoader.list_directory(\"res://Icons/\")
-		var all_icons : Array[Icon] = []
-		for f in icon_paths:
-			all_icons.append(load(\"res://Icons/\" + f))
-		all_icons = all_icons.filter(func(f): return f.rarity <= current_rarity)
-		var icon : Icon = all_icons[randi() % len(all_icons)]
-		while icon in already_selected_icons:
-			icon = all_icons[randi() % len(all_icons)]
-		
-		already_selected_icons.append(icon)
-		panel.set_icon(icon)
-		panel.connect(\"icon_selected\", icon_selected)
-		$VBoxContainer/HBoxContainer.add_child(panel)
+		var type = randi()%3
+		match type:
+			0:
+				var panel = preload(\"res://add_relic_panel.tscn\").instantiate()
+				# Get random relic
+				var relic_paths = ResourceLoader.list_directory(\"res://Relics/\")
+				var all_relics : Array[Relic] = []
+				for f in relic_paths:
+					var r = load(\"res://Relics/\" + f)
+					if r:
+						all_relics.append(r)
+				all_relics = all_relics.filter(func(f): return f.rarity <= current_rarity)
+				var relic : Relic = all_relics[randi() % len(all_relics)]
+				while relic in already_selected_relics or SaveManager.has_relic_classification(relic.classification):
+					relic = all_relics[randi() % len(all_relics)]
+				
+				already_selected_relics.append(relic)
+				panel.set_relic(relic)
+				panel.connect(\"relic_selected\", relic_selected)
+				$VBoxContainer/HBoxContainer.add_child(panel)
+			1:
+				var panel = preload(\"res://add_color_panel.tscn\").instantiate()
+				# Get random color
+				var colors = Icon.COLOR.values()
+				colors.erase(Icon.COLOR.PINK)
+				colors.erase(Icon.COLOR.PURPLE)
+				var color = colors[randi() % len(colors)]
+				while color in already_selected_colors:
+					color = colors[randi() % len(colors)]
+				
+				already_selected_colors.append(color)
+				panel.set_color(color)
+				panel.connect(\"color_selected\", color_selected)
+				$VBoxContainer/HBoxContainer.add_child(panel)
+			2:
+				var panel = preload(\"res://add_effect_panel.tscn\").instantiate()
+				# Get random effect
+				var effects = Icon.EFFECT.values()
+				var effect = effects[randi() % len(effects)]
+				while effect in already_selected_colors:
+					effect = effects[randi() % len(effects)]
+				
+				already_selected_effects.append(effect)
+				panel.set_effect(effect)
+				panel.connect(\"effect_selected\", effect_selected)
+				$VBoxContainer/HBoxContainer.add_child(panel)
 
 func icon_selected(icon : Icon):
 	SaveManager.bag.append(icon)
+	for c in $VBoxContainer/HBoxContainer.get_children():
+		c.queue_free()
+	visible = false
+
+func relic_selected(relic : Relic):
+	SaveManager.relics.append(relic)
+	for c in $VBoxContainer/HBoxContainer.get_children():
+		c.queue_free()
+	visible = false
+
+func color_selected(color : Icon.COLOR):
+	SaveManager.unused_upgrade_colors.append(color)
+	for c in $VBoxContainer/HBoxContainer.get_children():
+		c.queue_free()
+	visible = false
+
+func effect_selected(effect : Icon.EFFECT):
+	SaveManager.unused_upgrade_effects.append(effect)
 	for c in $VBoxContainer/HBoxContainer.get_children():
 		c.queue_free()
 	visible = false

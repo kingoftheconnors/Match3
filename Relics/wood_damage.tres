@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://ct622afudwjs3"]
+
+[ext_resource type="Script" uid="uid://dprxm2o07dkwq" path="res://relic.gd" id="1_hmnjl"]
+
+[resource]
+script = ExtResource("1_hmnjl")
+name = "Splinters"
+classification = "WOOD_DAMAGE"
+description = "Popping Wood deals 1 damage to the enemy"
+rarity = 1
+cost = 30
+metadata/_custom_type_script = "uid://dprxm2o07dkwq"

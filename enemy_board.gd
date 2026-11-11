@@ -55,3 +55,7 @@ func set_size(size : SIZE):
 			$Enemy.position.x = 120
 			$Office.size.x = 200
 			$Office.position.x = -200
+		_:
+			$Enemy.position.x = 120
+			$Office.size.x = 200
+			$Office.position.x = -200

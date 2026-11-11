@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dpk0ow17onf4o"]
+
+[ext_resource type="Texture2D" uid="uid://bvrqvrj3rh00g" path="res://IconSprites/Red.png" id="1_44q2d"]
+[ext_resource type="Script" uid="uid://dca15608dgrav" path="res://bag_color_piece.gd" id="2_csyur"]
+
+[node name="ColorToAdd" type="TextureRect" unique_id=1131004675]
+offset_transform_enabled = true
+texture = ExtResource("1_44q2d")
+stretch_mode = 2
+script = ExtResource("2_csyur")

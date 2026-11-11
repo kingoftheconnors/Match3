@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://on7jxr2rh88l"]
+
+[ext_resource type="Script" uid="uid://bxsxngrsdlx36" path="res://bag.gd" id="1_u3xkn"]
+[ext_resource type="Script" uid="uid://2gam5ag7ggd6" path="res://bag_unused_materials.gd" id="2_76wf2"]
+[ext_resource type="Texture2D" uid="uid://bvrqvrj3rh00g" path="res://IconSprites/Red.png" id="3_4mvu4"]
+[ext_resource type="Script" uid="uid://dca15608dgrav" path="res://bag_color_piece.gd" id="4_j7did"]
+
+[sub_resource type="GDScript" id="GDScript_urblq"]
+script/source = "extends Panel
+
+func toggle_visible():
+	visible = !visible
+	if visible:
+		$BagPieces.open()
+		$ScrollContainer/Materials.open()
+"
+
+[node name="Bag" type="Panel" unique_id=1489635901]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_urblq")
+
+[node name="BagPieces" type="Panel" parent="." unique_id=917273326]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.30600002
+anchor_top = 0.056
+anchor_right = 0.96900004
+anchor_bottom = 0.94400007
+offset_left = -7.680023
+offset_top = -0.3199997
+offset_right = -0.32006836
+offset_bottom = 0.3199463
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u3xkn")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=599948605]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.037
+anchor_top = 0.056
+anchor_right = 0.28100002
+anchor_bottom = 0.94400007
+offset_left = 0.6399994
+offset_top = -0.3199997
+offset_right = 0.3199768
+offset_bottom = -7.6800537
+
+[node name="Materials" type="VBoxContainer" parent="ScrollContainer" unique_id=46398870]
+layout_mode = 2
+script = ExtResource("2_76wf2")
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/Materials" unique_id=1775090055]
+layout_mode = 2
+offset_transform_enabled = true
+texture = ExtResource("3_4mvu4")
+script = ExtResource("4_j7did")

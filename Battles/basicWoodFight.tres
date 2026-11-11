@@ -7,4 +7,5 @@
 [resource]
 resource_name = "BasicIce"
 script = ExtResource("3_7ubaq")
+appears_on_levels = Array[int]([0])
 enemies = Array[ExtResource("1_3tsq2")]([ExtResource("2_xm7je")])

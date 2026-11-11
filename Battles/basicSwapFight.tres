@@ -7,4 +7,5 @@
 [resource]
 resource_name = "BasicSwap"
 script = ExtResource("3_t5do1")
+appears_on_levels = Array[int]([0])
 enemies = Array[ExtResource("1_qv2mk")]([ExtResource("2_qv2mk")])

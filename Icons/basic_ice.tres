@@ -6,8 +6,12 @@
 [resource]
 script = ExtResource("1_krrl1")
 texture = ExtResource("2_j1qak")
-color = 6
-material = 3
+color = 8
+material = 0
 rarity = 1000
 name = "Ice"
 description = "Melts after 3 turns"
+damage = null
+block = null
+gold = null
+hurt = null

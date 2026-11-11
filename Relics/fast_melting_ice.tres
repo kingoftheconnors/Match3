@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://b50ejcrks08df"]
+
+[ext_resource type="Script" uid="uid://dprxm2o07dkwq" path="res://relic.gd" id="1_i2fck"]
+
+[resource]
+script = ExtResource("1_i2fck")
+name = "Salted Ice"
+classification = "FAST_ICE"
+rarity = 1
+cost = 30
+metadata/_custom_type_script = "uid://dprxm2o07dkwq"

@@ -6,8 +6,12 @@
 [resource]
 script = ExtResource("1_fglud")
 texture = ExtResource("2_yjpjo")
-color = 6
-material = 4
+color = 9
+material = 0
 rarity = 1000
 name = "Wood"
 description = "Pops when an adjacent icon is popped"
+damage = null
+block = null
+gold = null
+hurt = null

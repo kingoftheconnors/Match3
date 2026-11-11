@@ -6,19 +6,19 @@ script/source = "extends Button
 func _on_pressed() -> void:
 	SaveManager.clear_data()
 	SaveManager.bag = [
-		preload(\"res://Icons/basic_attack.tres\"),
-		preload(\"res://Icons/basic_attack.tres\"),
-		preload(\"res://Icons/basic_attack.tres\"),
-		preload(\"res://Icons/basic_attack.tres\"),
-		preload(\"res://Icons/basic_attack.tres\"),
-		preload(\"res://Icons/basic_defend.tres\"),
-		preload(\"res://Icons/basic_defend.tres\"),
-		preload(\"res://Icons/basic_defend.tres\"),
-		preload(\"res://Icons/basic_defend.tres\"),
-		preload(\"res://Icons/basic_defend.tres\"),
-		preload(\"res://Icons/basic_money.tres\"),
-		preload(\"res://Icons/basic_money.tres\"),
-		preload(\"res://Icons/basic_super.tres\"),
+		preload(\"res://Icons/basic_attack.tres\").duplicate(true),
+		preload(\"res://Icons/basic_attack.tres\").duplicate(true),
+		preload(\"res://Icons/basic_attack.tres\").duplicate(true),
+		preload(\"res://Icons/basic_attack.tres\").duplicate(true),
+		preload(\"res://Icons/basic_attack.tres\").duplicate(true),
+		preload(\"res://Icons/basic_defend.tres\").duplicate(true),
+		preload(\"res://Icons/basic_defend.tres\").duplicate(true),
+		preload(\"res://Icons/basic_defend.tres\").duplicate(true),
+		preload(\"res://Icons/basic_defend.tres\").duplicate(true),
+		preload(\"res://Icons/basic_defend.tres\").duplicate(true),
+		preload(\"res://Icons/basic_money.tres\").duplicate(true),
+		preload(\"res://Icons/basic_money.tres\").duplicate(true),
+		preload(\"res://Icons/basic_super.tres\").duplicate(true),
 	]
 	SaveManager.goto_level(0)
 	# Show map
